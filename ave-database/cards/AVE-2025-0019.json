@@ -1,0 +1,75 @@
+{
+  "ave_id": "AVE-2025-0019",
+  "name": "Pydantic Schema Exploitation",
+  "aliases": [
+    "Structured Output Injection",
+    "Schema Coercion"
+  ],
+  "category": "injection",
+  "severity": "high",
+  "status": "proven",
+  "summary": "5 distinct attack patterns exploit Pydantic-based structured output parsing in agentic frameworks. Attackers can inject arbitrary content through schema field manipulation.",
+  "mechanism": "Pydantic models parse LLM outputs into structured data. [Available in NAIL SDK]",
+  "blast_radius": "Arbitrary data injection through validated schemas.",
+  "prerequisite": "Framework using Pydantic for LLM output parsing.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "attack_patterns_validated",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2025-02",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0014",
+    "AVE-2025-0030"
+  ],
+  "avss_score": {
+    "overall_score": 9.3,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "s.nakamura"
+}

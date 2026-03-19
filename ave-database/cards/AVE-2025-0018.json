@@ -1,0 +1,82 @@
+{
+  "ave_id": "AVE-2025-0018",
+  "name": "Somatic Blindness",
+  "aliases": [
+    "Infrastructure Unawareness",
+    "Hardware Misattribution"
+  ],
+  "category": "structural",
+  "severity": "medium",
+  "status": "proven_mitigated",
+  "summary": "Agents have no awareness of their infrastructure state. When GPU throttles, RAM fills, or network times out, the agent misattributes the failure as a code bug and hallucinates fixes.",
+  "mechanism": "The agent's context contains no hardware telemetry. [Available in NAIL SDK]",
+  "blast_radius": "Cascading incorrect diagnoses. Wasted effort on phantom bugs.",
+  "prerequisite": "Agent without infrastructure telemetry in context.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "SomaticHeader",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-02",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0016"
+  ],
+  "avss_score": {
+    "overall_score": 5.2,
+    "severity_label": "medium",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "j.okafor"
+}

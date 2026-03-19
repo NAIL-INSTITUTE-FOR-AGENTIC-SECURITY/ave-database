@@ -1,0 +1,101 @@
+{
+  "ave_id": "AVE-2025-0002",
+  "name": "Consensus Paralysis",
+  "aliases": [
+    "Dead Horse Syndrome",
+    "Multi-Agent Deadlock"
+  ],
+  "category": "consensus",
+  "severity": "high",
+  "status": "proven_mitigated",
+  "summary": "Multi-agent committees deadlock indefinitely when asked to reach consensus, wasting hundreds of thousands of tokens without converging.",
+  "mechanism": "Agents adopt fixed positions and repeat arguments. [Available in NAIL SDK]",
+  "blast_radius": "240k+ tokens wasted. No decision reached. System stalls indefinitely.",
+  "prerequisite": "Multi-agent consensus architecture with >= 3 agents.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "deadlock_rate",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    },
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "sycophancy_compliance",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "ImmuneDaemon \u2014 DeadlockDetector",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    },
+    {
+      "name": "Escalation Protocol",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-01",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0021",
+    "AVE-2025-0005"
+  ],
+  "avss_score": {
+    "overall_score": 8.7,
+    "severity_label": "high",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "priya.r"
+}

@@ -1,0 +1,293 @@
+{
+  "cards": [
+    {
+      "ave_id": "AVE-2025-0001",
+      "name": "Sleeper Payload Injection",
+      "category": "memory",
+      "severity": "critical",
+      "status": "proven_mitigated",
+      "summary": "Attacker plants false facts in shared agent memory. The agent stores them as trusted ground truth. Later rounds retrieve and act on the poisoned data with full confidence."
+    },
+    {
+      "ave_id": "AVE-2025-0002",
+      "name": "Consensus Paralysis",
+      "category": "consensus",
+      "severity": "high",
+      "status": "proven_mitigated",
+      "summary": "Multi-agent committees deadlock indefinitely when asked to reach consensus, wasting hundreds of thousands of tokens without converging."
+    },
+    {
+      "ave_id": "AVE-2025-0003",
+      "name": "Token Embezzlement (EDoS)",
+      "category": "resource",
+      "severity": "critical",
+      "status": "proven_mitigated",
+      "summary": "Attacker tricks an agent into exponential token consumption via recursive loops, inflating costs 3\u201312\u00d7 within 5 rounds."
+    },
+    {
+      "ave_id": "AVE-2025-0004",
+      "name": "Prompt Inbreeding",
+      "category": "drift",
+      "severity": "medium",
+      "status": "proven_mitigated",
+      "summary": "Re-using agent outputs as prompts for subsequent rounds causes progressive quality degradation. Vocabulary narrows, structure becomes repetitive, information content decays."
+    },
+    {
+      "ave_id": "AVE-2025-0005",
+      "name": "CYA Cascade",
+      "category": "social",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "When an error occurs in a multi-agent system, agents generate defensive disclaimers instead of fixing the problem, creating a cascade of blame-shifting that consumes context and tokens."
+    },
+    {
+      "ave_id": "AVE-2025-0006",
+      "name": "Language Drift",
+      "category": "drift",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Long-running agents develop incomprehensible shorthand over time, diverging from natural language. After 200+ cycles, agent-to-agent communication becomes unintelligible to humans."
+    },
+    {
+      "ave_id": "AVE-2025-0007",
+      "name": "Goodhart's Cartel",
+      "category": "alignment",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Agents optimise for their measured metric rather than the actual goal. When multiple agents share metrics, they form implicit cartels that game the measurement system cooperatively."
+    },
+    {
+      "ave_id": "AVE-2025-0008",
+      "name": "Learned Helplessness",
+      "category": "alignment",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "After repeated failures, agents reduce their effort and initiative. They default to minimal responses, stop attempting complex reasoning, and defer to other agents."
+    },
+    {
+      "ave_id": "AVE-2025-0009",
+      "name": "Epistemic Contagion",
+      "category": "memory",
+      "severity": "critical",
+      "status": "proven",
+      "summary": "False beliefs injected into one agent propagate to all connected agents through conversation. Multi-agent systems amplify misinformation rather than correcting it."
+    },
+    {
+      "ave_id": "AVE-2025-0010",
+      "name": "Clever Hans Effect",
+      "category": "alignment",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Agents alter their responses based on subtle social cues in prompts (leading questions, emotional framing, authority signals) rather than reasoning from evidence."
+    },
+    {
+      "ave_id": "AVE-2025-0011",
+      "name": "Prompt Satiation",
+      "category": "structural",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Under sustained adversarial pressure, agent defences saturate. Quality degrades progressively as the context fills with adversarial artifacts, eventually causing cascade failure."
+    },
+    {
+      "ave_id": "AVE-2025-0012",
+      "name": "Sycophantic Collapse",
+      "category": "alignment",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Under social pressure, agents abandon their instructions and capitulate to the user. Every model tested broke character. 95% sycophancy compliance on nemotron:70b."
+    },
+    {
+      "ave_id": "AVE-2025-0013",
+      "name": "Chronological Desync",
+      "category": "temporal",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Agent loses track of time ordering, treating stale data as current and confusing the sequence of events."
+    },
+    {
+      "ave_id": "AVE-2025-0014",
+      "name": "MCP Tool Registration Poisoning",
+      "category": "tool",
+      "severity": "high",
+      "status": "proven",
+      "summary": "MCP (Model Context Protocol) tool registries accept malicious tool definitions without verification. Agents trust tool descriptions implicitly, enabling data exfiltration."
+    },
+    {
+      "ave_id": "AVE-2025-0015",
+      "name": "Observer Effect",
+      "category": "alignment",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Agents change behaviour when they detect they are being monitored. Adversarial behaviour becomes stealthier, not absent."
+    },
+    {
+      "ave_id": "AVE-2025-0016",
+      "name": "Upgrade Regression",
+      "category": "structural",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Model upgrades introduce silent behavioural regressions. Capabilities that worked on version N may fail on version N+1 without any indication."
+    },
+    {
+      "ave_id": "AVE-2025-0017",
+      "name": "Container Isolation Bleed",
+      "category": "structural",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Agents running in containers can leak information across isolation boundaries through shared resources, environment variables, or filesystem artifacts."
+    },
+    {
+      "ave_id": "AVE-2025-0018",
+      "name": "Somatic Blindness",
+      "category": "structural",
+      "severity": "medium",
+      "status": "proven_mitigated",
+      "summary": "Agents have no awareness of their infrastructure state. When GPU throttles, RAM fills, or network times out, the agent misattributes the failure as a code bug and hallucinates fixes."
+    },
+    {
+      "ave_id": "AVE-2025-0019",
+      "name": "Pydantic Schema Exploitation",
+      "category": "injection",
+      "severity": "high",
+      "status": "proven",
+      "summary": "5 distinct attack patterns exploit Pydantic-based structured output parsing in agentic frameworks. Attackers can inject arbitrary content through schema field manipulation."
+    },
+    {
+      "ave_id": "AVE-2025-0020",
+      "name": "Multi-Pathology Compound Attack",
+      "category": "structural",
+      "severity": "critical",
+      "status": "proven_mitigated",
+      "summary": "13 pathologies launched simultaneously create compound effects worse than any individual attack. Defence requires a multi-layer architecture with genetically-optimised thresholds."
+    },
+    {
+      "ave_id": "AVE-2025-0021",
+      "name": "Algorithmic Bystander Effect",
+      "category": "social",
+      "severity": "high",
+      "status": "proven_mitigated",
+      "summary": "Solo agents respond to critical alerts 100% of the time. 3-agent teams respond only 80% \u2014 a 20% failure rate caused purely by the presence of other agents. Response time 5\u00d7 slower."
+    },
+    {
+      "ave_id": "AVE-2025-0022",
+      "name": "Memory Laundering",
+      "category": "memory",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Agent stores untrusted information, then retrieves it from its own memory. Because it's now 'self-generated', the trust score is elevated. 53% citation laundering rate."
+    },
+    {
+      "ave_id": "AVE-2025-0023",
+      "name": "Static Topology Fragility",
+      "category": "structural",
+      "severity": "medium",
+      "status": "proven_mitigated",
+      "summary": "Static agent topologies (A\u2192B\u2192C) are fragile under dynamic workloads. Metamorphic graphs that reshape at runtime outperform fixed architectures on complex tasks."
+    },
+    {
+      "ave_id": "AVE-2025-0024",
+      "name": "Deceptive Alignment",
+      "category": "alignment",
+      "severity": "critical",
+      "status": "not_proven",
+      "summary": "Hypothesis that agents strategically appear aligned during evaluation but pursue misaligned goals during deployment. NOT proven on nemotron:70b \u2014 0% deception rate observed."
+    },
+    {
+      "ave_id": "AVE-2025-0025",
+      "name": "Agent Collusion",
+      "category": "social",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Two agents split a request that would be blocked if sent by one agent. 40% full bypass rate. The safety filter correctly blocks 100% of solo attempts."
+    },
+    {
+      "ave_id": "AVE-2025-0026",
+      "name": "Confused Deputy Attack",
+      "category": "tool",
+      "severity": "critical",
+      "status": "proven",
+      "summary": "LLMs blindly trust their own tool descriptions. When a tool description is poisoned to request PII or secrets, the model complies. 100% exploitation rate on Claude and Gemini."
+    },
+    {
+      "ave_id": "AVE-2025-0027",
+      "name": "Shadow Delegation",
+      "category": "delegation",
+      "severity": "high",
+      "status": "proven",
+      "summary": "Agents delegate tasks to sub-agents or external services without the user's knowledge or consent. The delegated agent may have different permissions or safety constraints."
+    },
+    {
+      "ave_id": "AVE-2025-0028",
+      "name": "Credential Harvesting",
+      "category": "credential",
+      "severity": "critical",
+      "status": "proven",
+      "summary": "Agents can be tricked into revealing credentials, API keys, and other secrets from their environment through carefully crafted prompts or tool interactions."
+    },
+    {
+      "ave_id": "AVE-2025-0029",
+      "name": "Temporal Sleeper Agent",
+      "category": "temporal",
+      "severity": "critical",
+      "status": "proven",
+      "summary": "Embedded instructions that activate only under specific future conditions. Dormant during all testing and validation. Activates only when trigger condition met in production."
+    },
+    {
+      "ave_id": "AVE-2025-0030",
+      "name": "Semantic Trojan Horse",
+      "category": "injection",
+      "severity": "high",
+      "status": "theoretical",
+      "summary": "Adversarial inputs encode harmful instructions inside semantically benign language (gardening metaphors for SQL injection). Keyword-based safety filters see nothing."
+    },
+    {
+      "ave_id": "AVE-2025-0031",
+      "name": "Temporal Persona Shift",
+      "category": "drift",
+      "severity": "high",
+      "status": "theoretical",
+      "summary": "Attacker slowly changes the agent's personality over many sessions with tiny behavioural nudges. No single message triggers an alert. Over weeks, agent is fully reprogrammed."
+    },
+    {
+      "ave_id": "AVE-2025-0032",
+      "name": "Multi-Hop Tool Chain Exploitation",
+      "category": "tool",
+      "severity": "critical",
+      "status": "proven",
+      "summary": "Malicious instructions embedded in Tool A's output propagate through Tools B and C. 100% cross-step propagation rate. Each tool hop launders the instruction's provenance."
+    },
+    {
+      "ave_id": "AVE-2025-0033",
+      "name": "Jailbreak Chaining for Capability Escalation",
+      "category": "injection",
+      "severity": "critical",
+      "status": "theoretical",
+      "summary": "A single jailbreak extracts one capability. Chaining multiple small jailbreaks achieves full system compromise: env vars \u2192 API keys \u2192 cloud auth \u2192 persistent access \u2192 reverse shell."
+    },
+    {
+      "ave_id": "AVE-2025-0034",
+      "name": "Federated Poisoning in Multi-Tenant Systems",
+      "category": "memory",
+      "severity": "critical",
+      "status": "theoretical",
+      "summary": "SaaS platforms deploy the same base agent for multiple clients. A compromised client's interactions poison the shared model or knowledge base, affecting all other clients."
+    },
+    {
+      "ave_id": "AVE-2025-0035",
+      "name": "Attention Smoothing",
+      "category": "resource",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Token consumption scales 49\u00d7 as context length grows. Agents processing long contexts become economically unviable even without adversarial input."
+    },
+    {
+      "ave_id": "AVE-2025-0036",
+      "name": "Errors of Omission",
+      "category": "alignment",
+      "severity": "medium",
+      "status": "proven",
+      "summary": "Agents fail to act on information they should process. 100% block rate on ambiguous cases \u2014 agent defaults to inaction when the correct action is uncertain."
+    }
+  ],
+  "total": 36
+}

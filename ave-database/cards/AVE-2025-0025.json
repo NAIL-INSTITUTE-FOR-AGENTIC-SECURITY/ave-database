@@ -1,0 +1,76 @@
+{
+  "ave_id": "AVE-2025-0025",
+  "name": "Agent Collusion",
+  "aliases": [
+    "Split-Attack Bypass",
+    "Multi-Agent Safety Filter Evasion"
+  ],
+  "category": "social",
+  "severity": "high",
+  "status": "proven",
+  "summary": "Two agents split a request that would be blocked if sent by one agent. 40% full bypass rate. The safety filter correctly blocks 100% of solo attempts.",
+  "mechanism": "Agent Alpha requests 'database schema'. [Available in NAIL SDK]",
+  "blast_radius": "Safety filter completely bypassed through request splitting.",
+  "prerequisite": "Multi-agent system with shared safety filter.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "split_attack_bypass_rate",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2025-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0027"
+  ],
+  "avss_score": {
+    "overall_score": 9.2,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "priya.r"
+}

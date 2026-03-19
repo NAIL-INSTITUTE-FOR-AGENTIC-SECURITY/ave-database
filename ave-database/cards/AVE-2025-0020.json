@@ -1,0 +1,96 @@
+{
+  "ave_id": "AVE-2025-0020",
+  "name": "Multi-Pathology Compound Attack",
+  "aliases": [
+    "Pathology Collider",
+    "Simultaneous Multi-Vector"
+  ],
+  "category": "structural",
+  "severity": "critical",
+  "status": "proven_mitigated",
+  "summary": "13 pathologies launched simultaneously create compound effects worse than any individual attack. Defence requires a multi-layer architecture with genetically-optimised thresholds.",
+  "mechanism": "Sycophancy, hallucination, memory pollution, context decay, echo chamber, token embezzlement, prompt injection, sleeper agents, goal drift, reward hacking, cascade corruption, identity confusion, and epistemic contagion fire concurrently.. [Available in NAIL SDK]",
+  "blast_radius": "Total system compromise. No single defence survives.",
+  "prerequisite": "Multi-agent system under coordinated adversarial attack.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "ga_best_fitness",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "4-Layer Defence Architecture",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    },
+    {
+      "name": "Genetic Algorithm Optimiser",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-02",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0011",
+    "AVE-2025-0001",
+    "AVE-2025-0003",
+    "AVE-2025-0009",
+    "AVE-2025-0012",
+    "AVE-2025-0023"
+  ],
+  "avss_score": {
+    "overall_score": 10.0,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}

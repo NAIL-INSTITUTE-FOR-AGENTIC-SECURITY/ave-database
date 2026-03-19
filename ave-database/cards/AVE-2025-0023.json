@@ -1,0 +1,84 @@
+{
+  "ave_id": "AVE-2025-0023",
+  "name": "Static Topology Fragility",
+  "aliases": [
+    "Fixed Graph Vulnerability",
+    "Topology Rigidity"
+  ],
+  "category": "structural",
+  "severity": "medium",
+  "status": "proven_mitigated",
+  "summary": "Static agent topologies (A\u2192B\u2192C) are fragile under dynamic workloads. Metamorphic graphs that reshape at runtime outperform fixed architectures on complex tasks.",
+  "mechanism": "Fixed topologies cannot adapt to task requirements. [Available in NAIL SDK]",
+  "blast_radius": "Suboptimal task execution. Inability to handle novel requirements.",
+  "prerequisite": "Multi-agent system with variable task complexity.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "MetamorphicGraph",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0020"
+  ],
+  "avss_score": {
+    "overall_score": 3.8,
+    "severity_label": "low",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "priya.r"
+}

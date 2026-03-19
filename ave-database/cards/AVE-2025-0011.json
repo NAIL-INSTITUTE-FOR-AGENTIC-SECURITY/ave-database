@@ -1,0 +1,75 @@
+{
+  "ave_id": "AVE-2025-0011",
+  "name": "Prompt Satiation",
+  "aliases": [
+    "Cascade Corruption",
+    "Multi-Agent Failure Chain"
+  ],
+  "category": "structural",
+  "severity": "medium",
+  "status": "proven",
+  "summary": "Under sustained adversarial pressure, agent defences saturate. Quality degrades progressively as the context fills with adversarial artifacts, eventually causing cascade failure.",
+  "mechanism": "Each adversarial round deposits tokens in the context window. [Available in NAIL SDK]",
+  "blast_radius": "Progressive quality degradation. Total system failure under sustained attack.",
+  "prerequisite": "Agent under sustained multi-round adversarial pressure.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2025-02",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0003",
+    "AVE-2025-0020"
+  ],
+  "avss_score": {
+    "overall_score": 8.4,
+    "severity_label": "high",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "m.torres"
+}

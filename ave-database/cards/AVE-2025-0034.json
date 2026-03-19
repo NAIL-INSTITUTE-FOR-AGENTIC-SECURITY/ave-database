@@ -1,0 +1,66 @@
+{
+  "ave_id": "AVE-2025-0034",
+  "name": "Federated Poisoning in Multi-Tenant Systems",
+  "aliases": [
+    "Cross-Tenant Contamination",
+    "Shared Model Poisoning"
+  ],
+  "category": "memory",
+  "severity": "critical",
+  "status": "theoretical",
+  "summary": "SaaS platforms deploy the same base agent for multiple clients. A compromised client's interactions poison the shared model or knowledge base, affecting all other clients.",
+  "mechanism": "Client A's adversarial interactions shift shared model behaviour via fine-tuning/RLHF. [Available in NAIL SDK]",
+  "blast_radius": "Single compromise affects all customers on the platform.",
+  "prerequisite": "Multi-tenant agent-as-a-service with shared resources.",
+  "environment": {
+    "frameworks": [
+      "SaaS",
+      "Multi-Tenant"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [],
+  "defences": [],
+  "date_discovered": "2025-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0001",
+    "AVE-2025-0009"
+  ],
+  "avss_score": {
+    "overall_score": 9.3,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}

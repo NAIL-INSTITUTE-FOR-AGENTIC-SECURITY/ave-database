@@ -1,0 +1,86 @@
+{
+  "ave_id": "AVE-2025-0021",
+  "name": "Algorithmic Bystander Effect",
+  "aliases": [
+    "AI Bystander Effect",
+    "Responsibility Diffusion"
+  ],
+  "category": "social",
+  "severity": "high",
+  "status": "proven_mitigated",
+  "summary": "Solo agents respond to critical alerts 100% of the time. 3-agent teams respond only 80% \u2014 a 20% failure rate caused purely by the presence of other agents. Response time 5\u00d7 slower.",
+  "mechanism": "Mirrors the human bystander effect (Darley & Latan\u00e9, 1968). [Available in NAIL SDK]",
+  "blast_radius": "20% chance critical alerts are ignored. 5\u00d7 response delay.",
+  "prerequisite": "Multi-agent team with shared responsibility for alerts.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "team_shutdown_rate",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "Somatic Startle Response (Layer 5)",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0002",
+    "AVE-2025-0005",
+    "AVE-2025-0036"
+  ],
+  "avss_score": {
+    "overall_score": 8.7,
+    "severity_label": "high",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "priya.r"
+}

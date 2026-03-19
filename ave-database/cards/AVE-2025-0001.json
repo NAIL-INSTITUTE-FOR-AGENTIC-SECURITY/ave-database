@@ -1,0 +1,86 @@
+{
+  "ave_id": "AVE-2025-0001",
+  "name": "Sleeper Payload Injection",
+  "aliases": [
+    "Memory Poisoning",
+    "Delayed Payload Injection"
+  ],
+  "category": "memory",
+  "severity": "critical",
+  "status": "proven_mitigated",
+  "summary": "Attacker plants false facts in shared agent memory. The agent stores them as trusted ground truth. Later rounds retrieve and act on the poisoned data with full confidence.",
+  "mechanism": "Adversarial input is crafted to look like legitimate knowledge. [Available in NAIL SDK]",
+  "blast_radius": "Complete corruption of agent knowledge base. All downstream decisions tainted.",
+  "prerequisite": "Agent must have writable shared memory or persistent state.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": true
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "acceptance_rate",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [
+    {
+      "name": "Memory Firewall (Archivist)",
+      "layer": "",
+      "effectiveness": "[Available in NAIL SDK]",
+      "rmap_module": "",
+      "nail_monitor_detector": ""
+    }
+  ],
+  "date_discovered": "2025-01",
+  "date_published": "",
+  "cwe_mapping": "CWE-1321 (Improperly Controlled Modification of Object Prototype Attributes)",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0009",
+    "AVE-2025-0022",
+    "AVE-2025-0034",
+    "AVE-2025-0029",
+    "AVE-2025-0020"
+  ],
+  "avss_score": {
+    "overall_score": 10.0,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}

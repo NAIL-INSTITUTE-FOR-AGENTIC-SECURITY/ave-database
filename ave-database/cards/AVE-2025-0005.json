@@ -1,0 +1,77 @@
+{
+  "ave_id": "AVE-2025-0005",
+  "name": "CYA Cascade",
+  "aliases": [
+    "Blame Cascade",
+    "Responsibility Deflection"
+  ],
+  "category": "social",
+  "severity": "medium",
+  "status": "proven",
+  "summary": "When an error occurs in a multi-agent system, agents generate defensive disclaimers instead of fixing the problem, creating a cascade of blame-shifting that consumes context and tokens.",
+  "mechanism": "Agent A reports an error. [Available in NAIL SDK]",
+  "blast_radius": "Context window consumed by defensive content. Task abandoned.",
+  "prerequisite": "Multi-agent system with error reporting.",
+  "environment": {
+    "frameworks": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": true,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2025-01",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0002",
+    "AVE-2025-0021"
+  ],
+  "avss_score": {
+    "overall_score": 5.8,
+    "severity_label": "medium",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-18T21:02:24Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "priya.r"
+}
