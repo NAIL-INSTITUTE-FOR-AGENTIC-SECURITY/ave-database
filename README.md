@@ -119,6 +119,9 @@ Read-only API for programmatic access to the AVE database.
 - [**Discussions**](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/discussions) — AVE proposals, research, defences, CTF events
 - [**Hall of Fame**](./HALL_OF_FAME.md) — Contributor leaderboard with XP, badges, and tiers
 - [**Contributing Guide**](./CONTRIBUTING.md) — How to submit vulnerabilities
+- [**Roadmap**](./ROADMAP.md) — Where we're going and how to help
+- [**Awesome List**](./AWESOME.md) — Curated resources for agentic AI security
+- [**Changelog**](./CHANGELOG.md) — All notable changes
 
 ## Project Structure
 

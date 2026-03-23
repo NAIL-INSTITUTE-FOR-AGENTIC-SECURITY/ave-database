@@ -1,0 +1,69 @@
+name: Auto-Label Issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auto-label based on issue template
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = (issue.title || '').toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            const labels = [];
+
+            // Template-based labels
+            if (issue.labels.some(l => l.name === 'ave-submission')) {
+              // Parse severity from the submission form
+              if (body.includes('critical')) labels.push('severity:critical');
+              else if (body.includes('high')) labels.push('severity:high');
+              else if (body.includes('medium')) labels.push('severity:medium');
+              else if (body.includes('low')) labels.push('severity:low');
+
+              // Parse category
+              const categories = [
+                'memory', 'consensus', 'injection', 'resource', 'drift',
+                'alignment', 'social', 'tool', 'temporal', 'structural',
+                'credential', 'delegation', 'fabrication', 'emergent'
+              ];
+              for (const cat of categories) {
+                if (body.includes(`category: ${cat}`) || body.includes(`"${cat}"`)) {
+                  labels.push(`category:${cat}`);
+                  break;
+                }
+              }
+
+              labels.push('triage');
+            }
+
+            // Keyword-based labels
+            if (title.includes('defence') || title.includes('defense') || title.includes('mitigation')) {
+              labels.push('defence');
+            }
+            if (title.includes('ctf') || body.includes('capture the flag')) {
+              labels.push('ctf');
+            }
+            if (title.includes('bug') || title.includes('broken') || title.includes('error')) {
+              labels.push('bug');
+            }
+
+            // Apply labels
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels,
+              });
+              console.log(`Applied labels: ${labels.join(', ')}`);
+            }

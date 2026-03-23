@@ -1,0 +1,41 @@
+name: Stale Issue & Discussion Triage
+
+on:
+  schedule:
+    # Every day at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: |
+            👋 This issue has been inactive for 30 days.
+
+            If this is still relevant, please comment with an update.
+            Otherwise it will be closed in 7 days.
+
+            **Need help finishing your submission?** Drop a message in
+            [Discussions](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/discussions)
+            — the community can help!
+          stale-pr-message: |
+            👋 This PR has been inactive for 14 days.
+
+            If you're still working on it, please push an update or comment.
+            Otherwise it will be closed in 7 days.
+          stale-issue-label: 'stale'
+          stale-pr-label: 'stale'
+          days-before-issue-stale: 30
+          days-before-pr-stale: 14
+          days-before-issue-close: 7
+          days-before-pr-close: 7
+          exempt-issue-labels: 'pinned,security,critical,in-progress'
+          exempt-pr-labels: 'pinned,security,in-progress'
+          operations-per-run: 30

@@ -1,0 +1,195 @@
+name: "Weekly Digest"
+
+on:
+  schedule:
+    # Every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  discussions: write
+
+jobs:
+  weekly-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git log
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install AVE package
+        run: pip install -e ave/
+
+      - name: Generate Weekly Digest
+        run: |
+          python - << 'PYEOF'
+          import json
+          import subprocess
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+
+          now = datetime.now(timezone.utc)
+          week_ago = now - timedelta(days=7)
+          week_str = week_ago.strftime("%Y-%m-%d")
+          now_str = now.strftime("%Y-%m-%d")
+
+          # ── Git activity ─────────────────────────────────────────
+          result = subprocess.run(
+              ["git", "log", f"--since={week_str}", "--oneline", "--no-merges"],
+              capture_output=True, text=True
+          )
+          commits = [l.strip() for l in result.stdout.strip().splitlines() if l.strip()]
+
+          # ── New / modified cards ─────────────────────────────────
+          result = subprocess.run(
+              ["git", "log", f"--since={week_str}", "--name-only", "--diff-filter=AM",
+               "--pretty=format:", "--", "ave-database/cards/"],
+              capture_output=True, text=True
+          )
+          changed_card_files = set(
+              l.strip() for l in result.stdout.strip().splitlines()
+              if l.strip() and l.strip().endswith(".json")
+          )
+
+          new_cards = []
+          for cf in sorted(changed_card_files):
+              p = Path(cf)
+              if p.exists():
+                  try:
+                      data = json.loads(p.read_text())
+                      new_cards.append({
+                          "id": data.get("ave_id", p.stem),
+                          "name": data.get("name", "Unknown"),
+                          "severity": data.get("severity", "unknown"),
+                          "category": data.get("category", "unknown"),
+                      })
+                  except Exception:
+                      pass
+
+          # ── Database stats ───────────────────────────────────────
+          cards_dir = Path("ave-database/cards")
+          total_cards = sum(1 for d in cards_dir.iterdir() if d.is_dir())
+
+          sev_counts = {}
+          cat_counts = {}
+          for d in cards_dir.iterdir():
+              jf = d / f"{d.name}.json"
+              if jf.exists():
+                  try:
+                      data = json.loads(jf.read_text())
+                      s = data.get("severity", "unknown")
+                      c = data.get("category", "unknown")
+                      sev_counts[s] = sev_counts.get(s, 0) + 1
+                      cat_counts[c] = cat_counts.get(c, 0) + 1
+                  except Exception:
+                      pass
+
+          # ── Build digest ─────────────────────────────────────────
+          sev_emoji = {
+              "critical": "🔴", "high": "🟠", "medium": "🟡",
+              "low": "🟢", "info": "ℹ️"
+          }
+
+          lines = [
+              f"# 📰 AVE Weekly Digest — {week_str} → {now_str}",
+              "",
+              f"> Auto-generated on {now.strftime('%Y-%m-%d %H:%M UTC')}",
+              "",
+              "---",
+              "",
+              "## 📊 Database Snapshot",
+              "",
+              f"**Total AVE Cards:** {total_cards}",
+              "",
+              "| Severity | Count |",
+              "|----------|------:|",
+          ]
+          for sev in ["critical", "high", "medium", "low", "info"]:
+              if sev in sev_counts:
+                  lines.append(f"| {sev_emoji.get(sev, '')} {sev} | {sev_counts[sev]} |")
+
+          lines += ["", "---", ""]
+
+          if new_cards:
+              lines += [
+                  f"## 🆕 New/Updated Cards This Week ({len(new_cards)})",
+                  "",
+                  "| AVE ID | Name | Severity | Category |",
+                  "|--------|------|----------|----------|",
+              ]
+              for c in new_cards:
+                  emoji = sev_emoji.get(c["severity"], "")
+                  lines.append(
+                      f"| `{c['id']}` | {c['name']} | {emoji} {c['severity']} | {c['category']} |"
+                  )
+              lines += ["", "---", ""]
+          else:
+              lines += [
+                  "## 🆕 New Cards This Week",
+                  "",
+                  "No new cards this week. [Submit one!]"
+                  "(https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/"
+                  "ave-database/issues/new?template=ave-submission.yml)",
+                  "",
+                  "---",
+                  "",
+              ]
+
+          lines += [
+              f"## 🔨 Activity ({len(commits)} commits)",
+              "",
+          ]
+          for commit in commits[:15]:
+              lines.append(f"- `{commit}`")
+          if len(commits) > 15:
+              lines.append(f"- ... and {len(commits) - 15} more")
+          lines += [
+              "",
+              "---",
+              "",
+              "## 🔗 Quick Links",
+              "",
+              "- 📖 [Browse the Database](https://nail-institute-for-agentic-security.github.io/ave-database/)",
+              "- 💬 [Discussions](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/discussions)",
+              "- 📝 [Submit a Vulnerability](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/issues/new?template=ave-submission.yml)",
+              "- 🏁 [CTF Events](https://nail-institute-for-agentic-security.github.io/ave-database/ctf.html)",
+              "- 🏆 [Hall of Fame](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/blob/main/HALL_OF_FAME.md)",
+              "",
+              "---",
+              "",
+              "*This digest is auto-generated every Monday. "
+              "[View workflow](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/"
+              "ave-database/actions/workflows/weekly-digest.yml)*",
+          ]
+
+          digest = "\n".join(lines)
+
+          # Write to file
+          digest_dir = Path("digests")
+          digest_dir.mkdir(exist_ok=True)
+          digest_file = digest_dir / f"digest-{now_str}.md"
+          digest_file.write_text(digest)
+
+          # Also write latest
+          (digest_dir / "LATEST.md").write_text(digest)
+
+          print(digest)
+          print(f"\n✅ Digest written to {digest_file}")
+          PYEOF
+
+      - name: Commit digest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add digests/
+          git diff --cached --quiet && echo "No changes" || (
+            git commit -m "digest: weekly digest $(date -u +%Y-%m-%d) [skip ci]"
+            git push
+          )

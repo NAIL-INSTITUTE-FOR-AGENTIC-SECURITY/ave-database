@@ -1,0 +1,99 @@
+name: Welcome New Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const isIssue = !!context.payload.issue;
+            const isPR = !!context.payload.pull_request;
+            const author = isIssue
+              ? context.payload.issue.user.login
+              : context.payload.pull_request.user.login;
+            const number = isIssue
+              ? context.payload.issue.number
+              : context.payload.pull_request.number;
+
+            // Check if this is their first contribution
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: author,
+              state: 'all',
+              per_page: 5,
+            });
+
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              per_page: 100,
+            });
+            const authorPRs = prs.filter(pr => pr.user.login === author);
+
+            const totalContributions = issues.length + authorPRs.length;
+
+            // Only welcome if this is their first contribution (count = 1)
+            if (totalContributions > 1) {
+              console.log(`${author} is a returning contributor (${totalContributions} contributions). Skipping welcome.`);
+              return;
+            }
+
+            if (isIssue) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                body: `## 👋 Welcome to the AVE Database, @${author}!
+
+            Thank you for your first contribution to the NAIL Institute's agentic AI security catalogue.
+
+            **What happens next:**
+            1. 🏷️ A reviewer will triage your submission within **48 hours**
+            2. 🔬 If validated, you'll be assigned a permanent **AVE ID**
+            3. 🏆 Your card earns **XP** and unlocks **badges** on the [Hall of Fame](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/blob/main/HALL_OF_FAME.md)
+
+            **Useful links:**
+            - 📖 [Contributing Guide](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/blob/main/CONTRIBUTING.md) — Card schema, evidence standards, review process
+            - 💬 [Discussions](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/discussions) — Ask questions, propose ideas
+            - 🔬 [Research Findings](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database/tree/main/research) — Our published results
+
+            Every contribution makes agentic AI safer. 🛡️`,
+              });
+            } else {
+              await github.rest.pulls.createReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: number,
+                event: 'COMMENT',
+                body: `## 👋 Welcome to the AVE Database, @${author}!
+
+            Thank you for your first pull request! 🎉
+
+            **Review process:**
+            1. 🏷️ A NAIL team member will review your submission
+            2. 🔬 We'll validate the vulnerability mechanism
+            3. ✅ Once approved, your card goes live with full attribution
+
+            **First-time PR checklist:**
+            - [ ] Card JSON passes \`python -m ave validate\`
+            - [ ] Severity and category are assigned
+            - [ ] Summary clearly describes the vulnerability
+
+            Welcome aboard — your contribution makes agentic AI safer! 🛡️`,
+              });
+            }
+
+            console.log(`Welcomed new contributor: ${author}`);
