@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nail-ave"
-version = "1.0.0"
+version = "2.0.0"
 description = "AVE — Agentic Vulnerabilities & Exposures. The CVE database for AI agent failures."
 readme = "README.md"
 license = {text = "CC-BY-SA-4.0"}

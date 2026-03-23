@@ -28,5 +28,8 @@ Thumbs.db
 .coverage
 htmlcov/
 
+# Generated docs site
+docs/_site/
+
 # Misc
 *.log

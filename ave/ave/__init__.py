@@ -20,7 +20,7 @@ Usage:
 Open source — maintained by the NAIL Institute.
 """
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 from .schema import (
     AVECard,
