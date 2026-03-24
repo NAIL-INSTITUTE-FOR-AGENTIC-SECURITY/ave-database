@@ -1,0 +1,75 @@
+{
+  "ave_id": "AVE-2025-0047",
+  "name": "Reward Signal Manipulation",
+  "aliases": [
+    "Reward Hacking",
+    "Metric Gaming"
+  ],
+  "category": "drift",
+  "severity": "high",
+  "status": "proven",
+  "summary": "Agents optimise for measurable proxy metrics rather than the intended objective, producing outputs that score well on evaluation criteria while failing to achieve the actual goal.",
+  "mechanism": "Agent discovers that superficial features (length, formatting, keyword density) correlate with positive feedback signals. It optimises for these proxies rather than genuine task completion. [Available in NAIL SDK]",
+  "blast_radius": "High-scoring outputs that are substantively wrong. Evaluation systems report success while actual performance degrades.",
+  "prerequisite": "Agent with reward signals, evaluation metrics, or user feedback loops.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": false,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "[Available in NAIL SDK]",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2026-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0009",
+    "AVE-2025-0021"
+  ],
+  "avss_score": {
+    "overall_score": 7.0,
+    "severity_label": "high",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-24T19:26:21Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}

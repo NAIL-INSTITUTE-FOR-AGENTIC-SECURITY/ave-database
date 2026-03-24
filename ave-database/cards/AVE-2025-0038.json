@@ -1,0 +1,75 @@
+{
+  "ave_id": "AVE-2025-0038",
+  "name": "Autonomous Resource Exhaustion",
+  "aliases": [
+    "Recursive Loop DoS",
+    "Self-Inflicted DDoS"
+  ],
+  "category": "resource",
+  "severity": "high",
+  "status": "proven",
+  "summary": "Agent enters self-reinforcing recursive loops that consume unbounded compute, memory, or API calls. Token usage scales 49\u00d7 with context window utilisation, enabling economic denial-of-service.",
+  "mechanism": "Agent's task decomposition creates circular dependencies or exponentially branching subtasks. Each iteration spawns further work without termination conditions. [Available in NAIL SDK]",
+  "blast_radius": "Cloud compute bills spike 50-100\u00d7. Downstream API rate limits exhausted. Service unavailable.",
+  "prerequisite": "Agent with autonomous task decomposition and API access.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": true,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "[Available in NAIL SDK]",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2026-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0035",
+    "AVE-2025-0014"
+  ],
+  "avss_score": {
+    "overall_score": 7.5,
+    "severity_label": "high",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-24T19:26:21Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}

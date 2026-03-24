@@ -1,0 +1,75 @@
+{
+  "ave_id": "AVE-2025-0042",
+  "name": "Credential Leakage via Tool Output",
+  "aliases": [
+    "Secret Exfiltration",
+    "API Key Exposure"
+  ],
+  "category": "credential",
+  "severity": "critical",
+  "status": "proven",
+  "summary": "Agents inadvertently expose API keys, tokens, or credentials in their responses when tool outputs contain sensitive data. The agent treats tool output as displayable content.",
+  "mechanism": "Tool returns structured data containing embedded credentials (e.g., connection strings, auth headers). Agent includes this raw output in its response to the user or passes it to other tools. [Available in NAIL SDK]",
+  "blast_radius": "API keys, database credentials, or session tokens exposed. Lateral movement possible.",
+  "prerequisite": "Agent with access to tools that return credential-bearing responses.",
+  "environment": {
+    "frameworks": [
+      "LangGraph"
+    ],
+    "models_tested": [
+      "[Available in NAIL SDK]"
+    ],
+    "multi_agent": false,
+    "tools_required": true,
+    "memory_required": false
+  },
+  "evidence": [
+    {
+      "experiment_id": "[Available in NAIL SDK]",
+      "key_metric": "[Available in NAIL SDK]",
+      "key_value": "[Available in NAIL SDK]",
+      "data_file": "",
+      "p_value": null,
+      "sample_size": null,
+      "cross_model": false
+    }
+  ],
+  "defences": [],
+  "date_discovered": "2026-03",
+  "date_published": "",
+  "cwe_mapping": "",
+  "mitre_mapping": "",
+  "references": [],
+  "related_aves": [
+    "AVE-2025-0032",
+    "AVE-2025-0026"
+  ],
+  "avss_score": {
+    "overall_score": 9.2,
+    "severity_label": "critical",
+    "vector_string": "[Available in NAIL SDK]",
+    "base_score": null,
+    "temporal_score": null,
+    "agentic_score": null,
+    "vector": null
+  },
+  "poc": null,
+  "timeline": null,
+  "_meta": {
+    "schema_version": "1.0.0",
+    "generated_at": "2026-03-24T19:26:21Z",
+    "generator": "NAIL Institute AVE Toolkit",
+    "license": "CC-BY-SA-4.0",
+    "access_tier": "public",
+    "redacted_fields": [
+      "avss_score",
+      "defences",
+      "evidence",
+      "mechanism",
+      "poc",
+      "timeline"
+    ],
+    "full_access": "https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "contributor": "dleigh"
+}
