@@ -91,15 +91,27 @@
 
 ---
 
+## ✅ Completed (continued)
+
+### Phase 8: Standards & Governance (Complete)
+
+- [x] **AVE Advisory Board** — 7-seat community-elected board with charter, election process, bylaws, nomination templates (governance/)
+- [x] **Formal AVE Standard** — AVE-RFC-0001: 18-section formal specification with normative JSON Schema, RFC template (standards/)
+- [x] **Certification Programme** — 4-tier "NAIL Certified" programme (Bronze→Platinum) with 40+ test cases, CLI checker, badge system (certification/)
+- [x] **Insurance Integration** — AVE-based risk scoring model with 4-component engine, premium calculator, 9 industry sectors (insurance/)
+- [x] **Regulatory Engagement** — Mapped to EU AI Act, NIST AI RMF, ISO 42001, EO 14110 with compliance CLI and multi-jurisdiction matrix (regulatory/)
+
+---
+
 ## 📋 Planned
 
-### Phase 8: Standards & Governance
+### Phase 9: Scale & Sustainability
 
-- [ ] **AVE Advisory Board** — Community-elected board for card review and taxonomy decisions
-- [ ] **Formal AVE Standard** — RFC-style specification for the AVE card format
-- [ ] **Certification Programme** — "NAIL Certified" badge for agent systems that pass AVE-based testing
-- [ ] **Insurance Integration** — AVE-based risk scoring for AI agent insurance policies
-- [ ] **Regulatory Engagement** — Feed AVE data into EU AI Act compliance frameworks
+- [ ] **International Partnerships** — Formal partnerships with NIST, ENISA, BSI, and AI safety institutes
+- [ ] **Commercial API** — Tiered API access with enterprise features (SLA, webhooks, bulk export)
+- [ ] **Training & Workshops** — Instructor-led training for NAIL Certified assessors
+- [ ] **Conference Presence** — Presentations at DEF CON AI Village, Black Hat, NeurIPS
+- [ ] **Sustainability Model** — Long-term funding via certification fees, enterprise partnerships, grants
 
 ---
 
@@ -129,9 +141,13 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 | Experiment Templates | 6 | 20+ |
 | Benchmark Suites | 4 | 10+ |
 | Study Protocols | 5 | 15+ |
+| Certification Tiers | 4 | 4 |
+| Regulatory Mappings | 4 | 8+ |
+| RFC Specifications | 1 | 5+ |
+| Insurance Industry Sectors | 9 | 15+ |
 | Weekly Digest Subscribers | 0 | 500+ |
 
 ---
 
-*Updated: July 2025*
+*Updated: March 2026*
 *NAIL Institute — Neuravant AI Limited*

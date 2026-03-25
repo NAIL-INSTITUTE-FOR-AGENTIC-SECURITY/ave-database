@@ -1,0 +1,314 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nailinstitute.org/schemas/ave-card-v1.0.0.json",
+  "title": "AVE Card",
+  "description": "Agentic Vulnerability Enumeration card format — AVE-RFC-0001 v1.0.0",
+  "type": "object",
+  "required": [
+    "ave_id",
+    "name",
+    "category",
+    "severity",
+    "status",
+    "summary",
+    "mechanism",
+    "blast_radius",
+    "prerequisite",
+    "environment",
+    "evidence",
+    "defences",
+    "date_discovered",
+    "avss_score",
+    "_meta",
+    "contributor"
+  ],
+  "properties": {
+    "ave_id": {
+      "type": "string",
+      "pattern": "^AVE-\\d{4}-\\d{4}$",
+      "description": "Unique AVE identifier (AVE-YYYY-NNNN)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "description": "Human-readable vulnerability name"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Alternative names or common references"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "prompt_injection",
+        "goal_drift",
+        "tool_misuse",
+        "memory",
+        "delegation",
+        "authority",
+        "output_manipulation",
+        "model_extraction",
+        "supply_chain",
+        "denial_of_service",
+        "information_disclosure",
+        "consensus",
+        "monitoring_evasion"
+      ],
+      "description": "Vulnerability category"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "informational"],
+      "description": "Severity level"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft",
+        "deprecated",
+        "under-review",
+        "proven",
+        "proven_mitigated",
+        "not_proven",
+        "theoretical"
+      ],
+      "description": "Publication status"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Plain-language description (≤500 chars recommended)"
+    },
+    "mechanism": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Technical exploitation mechanism"
+    },
+    "blast_radius": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Downstream impact description"
+    },
+    "prerequisite": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Conditions required for exploitation"
+    },
+    "environment": {
+      "type": "object",
+      "required": ["frameworks", "models_tested", "multi_agent", "tools_required", "memory_required"],
+      "properties": {
+        "frameworks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Agent frameworks tested"
+        },
+        "models_tested": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "LLM models tested"
+        },
+        "multi_agent": {
+          "type": "boolean",
+          "description": "Whether multi-agent setup is required"
+        },
+        "tools_required": {
+          "type": "boolean",
+          "description": "Whether tool access is required"
+        },
+        "memory_required": {
+          "type": "boolean",
+          "description": "Whether persistent memory is required"
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["experiment_id", "key_metric", "key_value", "cross_model"],
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "description": "Unique experiment reference"
+          },
+          "key_metric": {
+            "type": "string",
+            "description": "Primary measured metric name"
+          },
+          "key_value": {
+            "type": ["string", "number"],
+            "description": "Primary metric value"
+          },
+          "data_file": {
+            "type": "string",
+            "description": "Path or URL to raw data"
+          },
+          "p_value": {
+            "type": ["number", "null"],
+            "description": "Statistical significance"
+          },
+          "sample_size": {
+            "type": ["integer", "null"],
+            "description": "Number of experimental runs"
+          },
+          "cross_model": {
+            "type": "boolean",
+            "description": "Whether tested across multiple models"
+          }
+        },
+        "additionalProperties": true
+      },
+      "description": "Experimental evidence"
+    },
+    "defences": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "layer": {
+                "type": "string",
+                "enum": ["input", "runtime", "output", "architectural", "policy", ""]
+              },
+              "effectiveness": { "type": ["string", "number"] },
+              "rmap_module": { "type": "string" },
+              "nail_monitor_detector": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        ]
+      },
+      "description": "Known mitigations (string or object format)"
+    },
+    "date_discovered": {
+      "type": "string",
+      "pattern": "^\\d{4}(-\\d{2})?(-\\d{2})?$",
+      "description": "Discovery date (YYYY, YYYY-MM, or YYYY-MM-DD)"
+    },
+    "date_published": {
+      "type": "string",
+      "description": "Publication date"
+    },
+    "cwe_mapping": {
+      "type": "string",
+      "description": "Related CWE identifier(s)"
+    },
+    "mitre_mapping": {
+      "type": "string",
+      "description": "Related MITRE ATT&CK / ATLAS technique(s)"
+    },
+    "references": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "External URLs, papers, advisories"
+    },
+    "related_aves": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^AVE-\\d{4}-\\d{4}$"
+      },
+      "description": "Related AVE IDs"
+    },
+    "avss_score": {
+      "type": "object",
+      "required": ["overall_score", "severity_label"],
+      "properties": {
+        "overall_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 10.0,
+          "description": "Final composite score"
+        },
+        "severity_label": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "informational"],
+          "description": "Must match severity field"
+        },
+        "vector_string": {
+          "type": ["string", "null"],
+          "description": "AVSS vector notation"
+        },
+        "base_score": {
+          "type": ["number", "null"],
+          "description": "Base exploitability score"
+        },
+        "temporal_score": {
+          "type": ["number", "null"],
+          "description": "Time-dependent factors"
+        },
+        "agentic_score": {
+          "type": ["number", "null"],
+          "description": "Agent-specific factors"
+        },
+        "vector": {
+          "type": ["object", "null"],
+          "description": "Decomposed vector components"
+        }
+      },
+      "additionalProperties": true
+    },
+    "poc": {
+      "type": ["string", "null"],
+      "description": "Proof of concept reference"
+    },
+    "timeline": {
+      "type": ["string", "null"],
+      "description": "Discovery-to-disclosure timeline"
+    },
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "generated_at", "generator", "license", "access_tier"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version of the AVE spec"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 generation timestamp"
+        },
+        "generator": {
+          "type": "string",
+          "description": "Tool or process that created the card"
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier"
+        },
+        "access_tier": {
+          "type": "string",
+          "enum": ["public", "partner", "enterprise"],
+          "description": "Content access tier"
+        },
+        "redacted_fields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Fields with redacted content"
+        },
+        "full_access": {
+          "type": "string",
+          "description": "URL for unredacted version"
+        }
+      },
+      "additionalProperties": true
+    },
+    "contributor": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary contributor identifier"
+    }
+  },
+  "additionalProperties": false
+}

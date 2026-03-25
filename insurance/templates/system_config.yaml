@@ -1,0 +1,36 @@
+# System configuration template for NAIL Insurance Risk Scoring
+# Copy this file and fill in your agent system details
+
+name: "My Agent System"
+version: "1.0.0"
+
+architecture:
+  framework: "LangGraph"          # Agent framework (LangGraph, CrewAI, AutoGen, etc.)
+  model: "GPT-4o"                 # Primary LLM model
+  multi_agent: false              # true if multi-agent system
+  agent_count: 1                  # Number of agents
+  delegation: "controlled"        # "controlled", "open", or "none"
+  memory: "ephemeral"             # "ephemeral" or "persistent"
+  autonomy: "supervised"          # "human-in-loop", "supervised", "fully-autonomous"
+  tools:                          # List of tools the agent can use
+    - name: "web_search"
+      access: "read"              # "read", "write", "read_write", "unrestricted"
+    # - name: "database"
+    #   access: "read_write"
+
+deployment:
+  scope: "internal"               # "internal", "partner-facing", "public-facing"
+  data_sensitivity: "non-sensitive"  # "non-sensitive", "business-sensitive", "pii", "financial"
+  autonomy: "supervised"          # Override if different from architecture
+  monitoring: true                # Continuous monitoring in place
+  incident_response_plan: true    # Documented IRP exists
+
+certification:
+  nail_tier: "none"               # "none", "bronze", "silver", "gold", "platinum"
+  cert_id: ""                     # NAIL certification ID (if certified)
+  expiry: ""                      # Certification expiry date (YYYY-MM-DD)
+
+history:
+  incidents_12m: 0                # Security incidents in last 12 months
+  claims_12m: 0                   # Insurance claims in last 12 months
+  operational_months: 0           # Total months in production

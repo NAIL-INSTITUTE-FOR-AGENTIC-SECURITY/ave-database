@@ -1,0 +1,159 @@
+# NIST AI Risk Management Framework — AVE Mapping
+# NIST AI 100-1 (January 2023)
+
+regulation:
+  name: "NIST AI RMF"
+  full_title: "NIST AI Risk Management Framework 1.0"
+  jurisdiction: "United States"
+  published_date: "2023-01-26"
+  url: "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework"
+  type: "voluntary_framework"
+
+functions:
+  govern:
+    description: "Cultivate and implement a culture of AI risk management"
+    subcategories:
+      - id: "GOVERN 1"
+        title: "Policies, processes, procedures, and practices"
+        ave_mapping:
+          - "Advisory Board charter — governance/advisory-board/CHARTER.md"
+          - "Code of Conduct — CODE_OF_CONDUCT.md"
+          - "Contributing guidelines — CONTRIBUTING.md"
+          - "Security policy — SECURITY.md"
+
+      - id: "GOVERN 2"
+        title: "Accountability structures"
+        ave_mapping:
+          - "Advisory Board responsibilities and election process"
+          - "Working Groups with defined reporting"
+          - "Contributor tiers and gamification"
+
+      - id: "GOVERN 3"
+        title: "Workforce diversity, equity, inclusion"
+        ave_mapping:
+          - "Open community governance"
+          - "Community-elected board seats"
+
+      - id: "GOVERN 4"
+        title: "Organisational risk tolerance"
+        ave_mapping:
+          - "Certification tier thresholds (70/80/90%)"
+          - "Insurance risk tiers (Excellent → Critical)"
+          - "AVSS severity levels"
+
+      - id: "GOVERN 5"
+        title: "Processes for engagement"
+        ave_mapping:
+          - "Partner Programme (4 tiers)"
+          - "GitHub Discussions (5 categories)"
+          - "Responsible Disclosure policy"
+
+      - id: "GOVERN 6"
+        title: "Policies and procedures transparent"
+        ave_mapping:
+          - "Public ROADMAP.md"
+          - "RFC process for standard changes"
+          - "Board meeting minutes published"
+
+  map:
+    description: "Contextualise risks related to the AI system"
+    subcategories:
+      - id: "MAP 1"
+        title: "Context established and understood"
+        ave_mapping:
+          - "AVE environment object (framework, model, multi_agent, tools, memory)"
+          - "Insurance system_config.yaml (deployment scope, data sensitivity)"
+
+      - id: "MAP 2"
+        title: "Categorisation of AI system"
+        ave_mapping:
+          - "13 AVE vulnerability categories"
+          - "8 severity-status combinations"
+          - "EU AI Act risk level classification"
+
+      - id: "MAP 3"
+        title: "AI benefits and costs assessed"
+        ave_mapping:
+          - "AVSS scoring (base, agentic, temporal)"
+          - "Blast radius descriptions"
+          - "Insurance premium calculations"
+
+      - id: "MAP 4"
+        title: "Risks and benefits mapped"
+        ave_mapping:
+          - "AVE cards: mechanism + defences"
+          - "Category-to-regulation mapping"
+          - "Cost-benefit via insurance model"
+
+      - id: "MAP 5"
+        title: "Likelihood and impact characterised"
+        ave_mapping:
+          - "AVSS overall_score (0.0-10.0)"
+          - "Category weights (1.0x-2.0x)"
+          - "Evidence: p_value, sample_size"
+
+  measure:
+    description: "Analyse, assess, benchmark, and monitor AI risk"
+    subcategories:
+      - id: "MEASURE 1"
+        title: "Appropriate methods and metrics"
+        ave_mapping:
+          - "AVSS scoring system"
+          - "Certification scoring (0-4 per category)"
+          - "Benchmark suites with standardised metrics"
+          - "Longitudinal study metrics (10 standard)"
+
+      - id: "MEASURE 2"
+        title: "AI systems evaluated"
+        ave_mapping:
+          - "Certification test suites (40+ test cases)"
+          - "Community experiments (6 templates)"
+          - "Defence benchmarks (4 pre-built suites)"
+
+      - id: "MEASURE 3"
+        title: "Risks tracked"
+        ave_mapping:
+          - "Research Scout — automated scanning"
+          - "RSS/Atom feeds — real-time updates"
+          - "Longitudinal studies — 90-day tracking"
+
+      - id: "MEASURE 4"
+        title: "Measurement approaches feedback"
+        ave_mapping:
+          - "RFC process for standard evolution"
+          - "Community experiments for reproduction"
+          - "Advisory Board review of methodology"
+
+  manage:
+    description: "Allocate resources to manage AI risks"
+    subcategories:
+      - id: "MANAGE 1"
+        title: "Risks prioritised"
+        ave_mapping:
+          - "Severity levels: critical/high/medium/low"
+          - "Category weights for insurance scoring"
+          - "AVSS composite scoring"
+
+      - id: "MANAGE 2"
+        title: "Strategies to maximise benefits and minimise risks"
+        ave_mapping:
+          - "Defence arrays on every AVE card"
+          - "Framework-specific hardening guides (4 frameworks)"
+          - "RMAP module references"
+          - "Certification programme with tiers"
+
+      - id: "MANAGE 3"
+        title: "Risks monitored"
+        ave_mapping:
+          - "Research Scout continuous monitoring"
+          - "Longitudinal 90-day observations"
+          - "AVE feed subscriptions"
+          - "NAIL Certified renewal cycles"
+
+      - id: "MANAGE 4"
+        title: "Risks communicated"
+        ave_mapping:
+          - "Responsible Disclosure policy (90-day timeline)"
+          - "Partner Programme escalation paths"
+          - "Public AVE cards and advisories"
+          - "Weekly community digest"

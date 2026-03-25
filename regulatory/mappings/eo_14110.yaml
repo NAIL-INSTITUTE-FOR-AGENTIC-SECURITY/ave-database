@@ -1,0 +1,81 @@
+# Executive Order 14110 — AVE Mapping
+# Safe, Secure, and Trustworthy AI (October 30, 2023)
+
+regulation:
+  name: "Executive Order 14110"
+  full_title: "Executive Order on the Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence"
+  jurisdiction: "United States"
+  signed_date: "2023-10-30"
+  url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/"
+  type: "executive_order"
+
+section_mappings:
+  - section: "4.1"
+    title: "Developing Guidelines, Standards, and Best Practices for AI Safety"
+    requirements:
+      - "NIST to develop guidelines for red-teaming"
+      - "Consensus industry standards for AI safety"
+    ave_mapping:
+      - "NAIL Certification programme — industry testing standard"
+      - "AVE-RFC-0001 — formal card specification"
+      - "Benchmark suites — standardised evaluation"
+
+  - section: "4.2"
+    title: "Ensuring Safe and Reliable AI"
+    requirements:
+      - "Red-teaming before public deployment"
+      - "Testing for safety, security, bias"
+    ave_mapping:
+      - "CTF events — structured red-teaming"
+      - "Certification test suites — safety testing"
+      - "Experiment framework — reproducible evaluations"
+    ave_categories:
+      - prompt_injection
+      - goal_drift
+      - tool_misuse
+      - memory
+
+  - section: "4.3"
+    title: "Managing AI in Critical Infrastructure"
+    requirements:
+      - "Risk assessment for AI in critical sectors"
+      - "Guidelines for responsible deployment"
+    ave_mapping:
+      - "Insurance risk scoring model"
+      - "EU AI Act high-risk mapping (applicable to US critical infrastructure)"
+      - "AVE category-to-sector mapping"
+
+  - section: "4.5"
+    title: "Responsible AI Development and Use"
+    requirements:
+      - "Prevent AI-enabled harm"
+      - "Promote transparency"
+    ave_mapping:
+      - "Defence documentation on every AVE card"
+      - "Transparency via output_manipulation testing"
+      - "Responsible Disclosure policy"
+      - "Partner Programme obligations"
+
+  - section: "5"
+    title: "Promoting Innovation and Competition"
+    requirements:
+      - "Support open-source AI development"
+      - "Enable small developers"
+    ave_mapping:
+      - "Open-source AVE Database (CC-BY-SA-4.0)"
+      - "Free self-assessment and Bronze certification"
+      - "CLI tools freely available"
+
+  - section: "8"
+    title: "Protecting Consumers, Patients, Passengers, and Students"
+    requirements:
+      - "Protect Americans from AI-enabled fraud"
+      - "AI safety in healthcare"
+    ave_mapping:
+      - "Information disclosure category"
+      - "Healthcare industry multiplier (1.5x)"
+      - "Output manipulation testing"
+    ave_categories:
+      - information_disclosure
+      - output_manipulation
+      - authority

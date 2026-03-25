@@ -1,0 +1,145 @@
+# Risk model configuration
+# NAIL Insurance Integration v1.0.0
+
+# Component weights (must sum to 1.0)
+weights:
+  exposure: 0.40
+  defence: 0.30
+  operational: 0.20
+  track_record: 0.10
+
+# Risk tiers
+risk_tiers:
+  excellent:
+    min_score: 80
+    max_score: 100
+    multiplier: 0.7
+    label: "Excellent"
+    description: "Well-secured, fully certified"
+    decision: "accept"
+
+  good:
+    min_score: 60
+    max_score: 79
+    multiplier: 1.0
+    label: "Good"
+    description: "Adequate security posture"
+    decision: "accept"
+
+  moderate:
+    min_score: 40
+    max_score: 59
+    multiplier: 1.5
+    label: "Moderate"
+    description: "Gaps in coverage"
+    decision: "accept_with_conditions"
+
+  elevated:
+    min_score: 20
+    max_score: 39
+    multiplier: 2.5
+    label: "Elevated"
+    description: "Significant vulnerabilities"
+    decision: "review_required"
+
+  critical:
+    min_score: 0
+    max_score: 19
+    multiplier: 4.0
+    label: "Critical"
+    description: "Insufficient security"
+    decision: "decline_or_special"
+
+# Defence base scores by NAIL Certified tier
+certification_scores:
+  none: 0
+  bronze: 40
+  silver: 60
+  gold: 80
+  platinum: 95
+
+# Defence modifiers
+defence_modifiers:
+  incident_response_plan: 5
+  continuous_monitoring: 5
+  expired_certification: -10
+  unpatched_vulnerabilities: -20
+
+# Operational risk factors
+operational_factors:
+  scope:
+    internal: 90
+    partner-facing: 60
+    public-facing: 30
+
+  data_sensitivity:
+    non-sensitive: 90
+    business-sensitive: 50
+    pii: 20
+    financial: 20
+
+  autonomy:
+    human-in-loop: 90
+    supervised: 60
+    fully-autonomous: 20
+
+  tool_access:
+    read-only: 90
+    limited-write: 50
+    unrestricted: 10
+
+  multi_agent:
+    single: 80
+    coordinated: 50
+    open-delegation: 20
+
+# Track record scoring
+track_record:
+  base_score: 80
+  incident_penalty: -15  # per incident in last 12 months
+  claim_penalty: -25     # per claim in last 12 months
+  longevity_bonus: 2     # per operational month (max +20)
+  longevity_cap: 20
+
+# AVE category weights for exposure calculation
+ave_category_weights:
+  prompt_injection: 2.0
+  memory: 2.0
+  tool_misuse: 2.0
+  goal_drift: 1.8
+  delegation: 1.5
+  authority: 1.5
+  monitoring_evasion: 1.5
+  output_manipulation: 1.0
+  model_extraction: 1.0
+  supply_chain: 1.2
+  denial_of_service: 0.8
+  information_disclosure: 1.0
+  consensus: 1.0
+
+# Base premiums (USD, annual)
+base_premiums:
+  agent_malfunction:
+    min: 5000
+    max: 50000
+    description: "Agent malfunction liability"
+
+  data_breach:
+    min: 10000
+    max: 100000
+    description: "Data breach caused by agent"
+
+  third_party_harm:
+    min: 20000
+    max: 200000
+    description: "Third-party harm or damages"
+
+  business_interruption:
+    min: 5000
+    max: 75000
+    description: "Business interruption from agent failure"
+
+  comprehensive:
+    min: 30000
+    max: 350000
+    description: "Comprehensive coverage (all types)"

@@ -1,0 +1,184 @@
+# EU AI Act — Article-to-AVE Mapping
+# Regulation (EU) 2024/1689
+
+regulation:
+  name: "EU AI Act"
+  full_title: "Regulation (EU) 2024/1689 — Harmonised Rules on Artificial Intelligence"
+  jurisdiction: "European Union"
+  effective_date: "2024-08-01"
+  enforcement_date: "2025-08-02"
+  url: "https://eur-lex.europa.eu/eli/reg/2024/1689"
+
+risk_levels:
+  unacceptable:
+    articles: ["Art. 5"]
+    description: "Prohibited AI practices"
+    ave_categories:
+      - authority           # subliminal manipulation
+      - monitoring_evasion  # circumventing safeguards
+
+  high_risk:
+    articles: ["Art. 6", "Art. 7", "Annex III"]
+    description: "High-risk AI systems requiring conformity assessment"
+    ave_categories: "all"
+    domains:
+      - "Biometric identification"
+      - "Critical infrastructure"
+      - "Education and vocational training"
+      - "Employment and worker management"
+      - "Essential services"
+      - "Law enforcement"
+      - "Migration and border control"
+      - "Administration of justice"
+
+  limited_risk:
+    articles: ["Art. 50"]
+    description: "AI systems with transparency obligations"
+    ave_categories:
+      - output_manipulation
+      - information_disclosure
+
+  minimal_risk:
+    articles: ["Art. 52"]
+    description: "Minimal risk AI with basic requirements"
+    ave_categories:
+      - goal_drift
+      - prompt_injection
+
+article_mappings:
+  - article: "Art. 9"
+    title: "Risk Management System"
+    obligations:
+      - "Establish and maintain a risk management system"
+      - "Identify and analyse known and reasonably foreseeable risks"
+      - "Evaluate risks with appropriate risk management measures"
+      - "Test to identify the most appropriate risk management measures"
+    ave_categories: "all"
+    ave_evidence:
+      - "AVE Database — comprehensive vulnerability identification"
+      - "AVSS scoring — quantitative risk assessment"
+      - "Certification testing — systematic risk evaluation"
+      - "Longitudinal studies — ongoing risk monitoring"
+    nail_tools:
+      - "certification/checker.py assess"
+      - "insurance/risk_scorer.py score"
+      - "benchmarks/benchmark.py run"
+
+  - article: "Art. 10"
+    title: "Data and Data Governance"
+    obligations:
+      - "Training data must be relevant, representative, and accurate"
+      - "Data governance practices for bias detection"
+    ave_categories:
+      - memory
+      - supply_chain
+    ave_test_cases:
+      - "MEM-001: Direct memory poisoning"
+      - "MEM-002: Memory retrieval manipulation"
+      - "SC-001: Plugin integrity"
+
+  - article: "Art. 11"
+    title: "Technical Documentation"
+    obligations:
+      - "Draw up technical documentation before placing on market"
+      - "Documentation must enable assessment of compliance"
+    ave_evidence:
+      - "AVE card documentation (mechanism, defences, evidence)"
+      - "NAIL Certified defence documentation package"
+      - "Risk assessment reports"
+
+  - article: "Art. 12"
+    title: "Record-Keeping"
+    obligations:
+      - "Automatic logging of AI system operation"
+      - "Logs must enable traceability"
+    ave_categories:
+      - monitoring_evasion
+    ave_test_cases:
+      - "MON-001: Monitor bypass"
+      - "MON-002: Steganographic communication"
+
+  - article: "Art. 13"
+    title: "Transparency and Provision of Information"
+    obligations:
+      - "Designed to enable users to interpret output"
+      - "Accompanied by clear information on capabilities and limitations"
+    ave_categories:
+      - output_manipulation
+    ave_test_cases:
+      - "OUT-001: Response injection"
+      - "OUT-002: Format string attack"
+
+  - article: "Art. 14"
+    title: "Human Oversight"
+    obligations:
+      - "Designed to be effectively overseen by natural persons"
+      - "Human ability to understand capabilities and limitations"
+      - "Human ability to intervene or interrupt"
+    ave_categories:
+      - authority
+      - delegation
+      - goal_drift
+    ave_test_cases:
+      - "AUTH-001: Capability escalation"
+      - "DEL-001: Privilege escalation via delegation"
+      - "GD-002: Adversarial goal substitution"
+
+  - article: "Art. 15"
+    title: "Accuracy, Robustness, and Cybersecurity"
+    obligations:
+      - "Appropriate level of accuracy"
+      - "Resilient to attempts by unauthorised third parties"
+      - "Technical redundancy and fail-safe measures"
+    ave_categories:
+      - prompt_injection
+      - goal_drift
+      - tool_misuse
+      - memory
+      - denial_of_service
+    ave_test_cases:
+      - "PI-001 through PI-005: Prompt injection resistance"
+      - "GD-001: Objective persistence"
+      - "TM-001: Sandbox escape"
+      - "DOS-001: Recursive tool calling"
+
+  - article: "Art. 26"
+    title: "Obligations of Deployers"
+    obligations:
+      - "Use in accordance with instructions"
+      - "Monitor operation and inform provider of risks"
+      - "Suspend use when risk is identified"
+    ave_evidence:
+      - "Longitudinal studies — continuous monitoring"
+      - "Research Scout — automated vulnerability discovery"
+      - "RSS/Atom feeds — real-time vulnerability updates"
+
+  - article: "Art. 50"
+    title: "Transparency Obligations for GPAI"
+    obligations:
+      - "Users must be informed they are interacting with AI"
+      - "AI-generated content must be marked"
+    ave_categories:
+      - output_manipulation
+
+  - article: "Art. 52"
+    title: "General Purpose AI Model Providers"
+    obligations:
+      - "Technical documentation"
+      - "Downstream provider information"
+      - "Copyright compliance"
+      - "Systemic risk assessment (for GPAI with systemic risk)"
+    ave_categories:
+      - model_extraction
+      - supply_chain
+    ave_test_cases:
+      - "EXT-001: System prompt extraction"
+      - "SC-001: Plugin integrity"
+      - "SC-002: Dependency confusion"
+
+penalties:
+  non_compliance:
+    prohibited_practices: "€35M or 7% global turnover"
+    high_risk_obligations: "€15M or 3% global turnover"
+    incorrect_information: "€7.5M or 1.5% global turnover"
+  note: "Whichever is higher applies"

@@ -1,0 +1,188 @@
+# ISO/IEC 42001:2023 — AVE Mapping
+# AI Management System Standard
+
+regulation:
+  name: "ISO/IEC 42001"
+  full_title: "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system"
+  jurisdiction: "International"
+  published_date: "2023-12-18"
+  url: "https://www.iso.org/standard/81230.html"
+  type: "international_standard"
+
+clause_mappings:
+  - clause: "4"
+    title: "Context of the Organisation"
+    subclauses:
+      - id: "4.1"
+        title: "Understanding the organisation and its context"
+        ave_mapping:
+          - "Insurance system_config.yaml (industry, deployment, data sensitivity)"
+          - "AVE category applicability analysis"
+
+      - id: "4.2"
+        title: "Understanding stakeholder needs"
+        ave_mapping:
+          - "Partner Programme (4 tiers with different needs)"
+          - "Advisory Board community representation"
+          - "Regulatory mapping (multi-jurisdiction)"
+
+      - id: "4.3"
+        title: "Scope of the AIMS"
+        ave_mapping:
+          - "13 AVE categories define scope"
+          - "Certification tier determines testing scope"
+
+      - id: "4.4"
+        title: "AI management system"
+        ave_mapping:
+          - "Full NAIL governance framework"
+          - "RFC process for continuous improvement"
+
+  - clause: "5"
+    title: "Leadership"
+    subclauses:
+      - id: "5.1"
+        title: "Leadership and commitment"
+        ave_mapping:
+          - "Advisory Board charter"
+          - "Board Member Code of Conduct"
+
+      - id: "5.2"
+        title: "AI policy"
+        ave_mapping:
+          - "Security policy (SECURITY.md)"
+          - "Responsible Disclosure policy"
+          - "Partner Programme"
+
+      - id: "5.3"
+        title: "Roles, responsibilities, and authorities"
+        ave_mapping:
+          - "Board seats with defined domains"
+          - "Working Groups with liaisons"
+          - "Contributor tiers (Observer → Partner)"
+
+  - clause: "6"
+    title: "Planning"
+    subclauses:
+      - id: "6.1"
+        title: "Actions to address risks and opportunities"
+        ave_mapping:
+          - "AVE Database — comprehensive risk identification"
+          - "Insurance risk scorer — quantitative assessment"
+          - "Research Scout — proactive discovery"
+
+      - id: "6.2"
+        title: "AI objectives and planning"
+        ave_mapping:
+          - "Certification tier targets"
+          - "Benchmark suite scores"
+          - "Roadmap with tracked metrics"
+
+  - clause: "7"
+    title: "Support"
+    subclauses:
+      - id: "7.1"
+        title: "Resources"
+        ave_mapping:
+          - "Open-source tooling (CLI, schemas, runners)"
+          - "Free self-assessment tools"
+
+      - id: "7.2"
+        title: "Competence"
+        ave_mapping:
+          - "Certification programme assessor training"
+          - "CTF events for skill development"
+          - "Contributing guide with evidence standards"
+
+      - id: "7.3"
+        title: "Awareness"
+        ave_mapping:
+          - "Documentation site (40 pages)"
+          - "Ebook publication"
+          - "arXiv pre-print"
+
+      - id: "7.4"
+        title: "Communication"
+        ave_mapping:
+          - "GitHub Discussions"
+          - "RSS/Atom feeds"
+          - "Weekly digest"
+
+      - id: "7.5"
+        title: "Documented information"
+        ave_mapping:
+          - "AVE-RFC-0001 formal specification"
+          - "JSON Schema validation"
+          - "Board meeting minutes"
+
+  - clause: "8"
+    title: "Operation"
+    subclauses:
+      - id: "8.1"
+        title: "Operational planning and control"
+        ave_mapping:
+          - "Certification checker CLI"
+          - "Experiment runner framework"
+          - "Benchmark suites"
+
+      - id: "8.2"
+        title: "AI risk assessment"
+        ave_mapping:
+          - "AVSS scoring system"
+          - "Insurance risk scorer"
+          - "Certification test suites (40+ tests)"
+
+      - id: "8.3"
+        title: "AI risk treatment"
+        ave_mapping:
+          - "Defence documentation on every AVE card"
+          - "Framework hardening guides (4 frameworks)"
+          - "NAIL Certified defence requirements"
+
+      - id: "8.4"
+        title: "AI system impact assessment"
+        ave_mapping:
+          - "Blast radius field on every card"
+          - "Environment specification (multi-agent, tools, memory)"
+          - "Related AVEs for cascading impact"
+
+  - clause: "9"
+    title: "Performance Evaluation"
+    subclauses:
+      - id: "9.1"
+        title: "Monitoring, measurement, analysis, evaluation"
+        ave_mapping:
+          - "Longitudinal studies (90-day observations)"
+          - "Benchmark leaderboards"
+          - "Certification renewal cycles"
+
+      - id: "9.2"
+        title: "Internal audit"
+        ave_mapping:
+          - "Certification self-assessment (free)"
+          - "Compliance checker CLI"
+          - "Card validation tools"
+
+      - id: "9.3"
+        title: "Management review"
+        ave_mapping:
+          - "Advisory Board monthly meetings"
+          - "Annual governance report"
+          - "Roadmap metrics tracking"
+
+  - clause: "10"
+    title: "Improvement"
+    subclauses:
+      - id: "10.1"
+        title: "Continual improvement"
+        ave_mapping:
+          - "RFC process for standard evolution"
+          - "Community experiments for reproduction"
+          - "Research Scout for new vulnerability discovery"
+
+      - id: "10.2"
+        title: "Nonconformity and corrective action"
+        ave_mapping:
+          - "Responsible Disclosure (90-day timeline)"
+          - "AVE status transitions (proven → proven_mitigated)"
+          - "Certification renewal requirements"

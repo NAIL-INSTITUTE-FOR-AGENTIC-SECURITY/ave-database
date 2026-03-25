@@ -1,0 +1,89 @@
+# Industry multipliers for insurance premiums
+# NAIL Insurance Integration v1.0.0
+
+industries:
+  healthcare:
+    multiplier: 1.5
+    rationale: "High data sensitivity (HIPAA), patient safety implications"
+    regulatory_requirements:
+      - "HIPAA compliance"
+      - "FDA AI/ML guidance (where applicable)"
+    typical_coverage: "comprehensive"
+
+  finance:
+    multiplier: 1.3
+    rationale: "Financial data sensitivity, regulatory scrutiny, fraud risk"
+    regulatory_requirements:
+      - "SOX compliance"
+      - "PCI-DSS (where applicable)"
+      - "SEC AI disclosure rules"
+    typical_coverage: "comprehensive"
+
+  legal:
+    multiplier: 1.3
+    rationale: "Attorney-client privilege, malpractice liability"
+    regulatory_requirements:
+      - "Bar association AI guidelines"
+      - "Client confidentiality obligations"
+    typical_coverage: "agent_malfunction"
+
+  government:
+    multiplier: 1.4
+    rationale: "National security, public trust, regulatory complexity"
+    regulatory_requirements:
+      - "NIST AI RMF"
+      - "Executive Order on AI"
+      - "FedRAMP (where applicable)"
+    typical_coverage: "comprehensive"
+
+  technology:
+    multiplier: 1.0
+    rationale: "Baseline industry — typically better internal security"
+    regulatory_requirements:
+      - "SOC 2 Type II"
+    typical_coverage: "data_breach"
+
+  retail:
+    multiplier: 1.1
+    rationale: "Consumer data, moderate risk"
+    regulatory_requirements:
+      - "PCI-DSS"
+      - "CCPA/GDPR (where applicable)"
+    typical_coverage: "data_breach"
+
+  education:
+    multiplier: 0.9
+    rationale: "Generally lower risk, but FERPA considerations"
+    regulatory_requirements:
+      - "FERPA"
+    typical_coverage: "agent_malfunction"
+
+  manufacturing:
+    multiplier: 1.2
+    rationale: "Operational safety, supply chain risks"
+    regulatory_requirements:
+      - "ISO 27001"
+    typical_coverage: "business_interruption"
+
+  insurance:
+    multiplier: 1.2
+    rationale: "Regulated industry, claims processing accuracy"
+    regulatory_requirements:
+      - "State insurance regulations"
+      - "NAIC guidelines"
+    typical_coverage: "comprehensive"
+
+# Volume discounts
+volume_discounts:
+  - agents: 1
+    discount: 1.0
+  - agents: 5
+    discount: 0.95
+  - agents: 10
+    discount: 0.90
+  - agents: 25
+    discount: 0.85
+  - agents: 50
+    discount: 0.80
+  - agents: 100
+    discount: 0.75
