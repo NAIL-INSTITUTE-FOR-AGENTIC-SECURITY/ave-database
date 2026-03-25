@@ -59,6 +59,12 @@
 - [x] **Companion Ebook** — 13-chapter accessible guide (publications/ebook/)
 - [x] **First CTF Event Design** — "Breaking the Hive" event defined (research/CTF_EVENT_001.md)
 - [x] **Test Coverage Expansion** — 76 tests (30 API hardening + 46 AVE toolkit + DB integrity)
+- [x] **Quantum Threshold Optimization** — QAOA optimizer beats GA by +3.1% fitness on DGX Spark (20 qubits)
+- [x] **Quantum Pathology Classification** — Hybrid QNN achieves 100% detection on 3/6 pathology classes
+- [x] **Quantum Robustness Certification** — Gold certified (99% CI: 97.4%–100%)
+- [x] **Quantum Multi-Agent Coordination** — QAOA task allocator validated at 6-agent scale
+- [x] **Quantum Risk Scoring** — VQC achieves 85% on 4-tier underwriting classification
+- [x] **Quantum Research Publication** — Full paper, results, visualizations, staging configs
 - [ ] **AVE-to-MITRE Mapping** — Formal mapping between AVE cards and MITRE ATT&CK / ATLAS techniques
 - [ ] **Framework Integration Guides** — Step-by-step hardening guides for LangChain, CrewAI, AutoGen, LlamaIndex
 

@@ -101,6 +101,21 @@ We publish our validated findings openly. 29 experiments across 5 model families
 
 📖 **[research/](./research/)** — Full findings, statistics, defence architecture, paper abstract
 
+## ⚛️ Quantum Research
+
+Quantum-enhanced optimization for agentic AI defence, running on NVIDIA DGX Spark
+(PennyLane + cuQuantum, 20-qubit GPU-accelerated simulation).
+
+| Experiment | Qubits | Key Result |
+|-----------|--------|------------|
+| **QAOA Threshold Optimizer** | 20 | +3.1% fitness, +17.6% accuracy over GA |
+| **Hybrid QNN Classifier** | 8 | 84.2% accuracy, 100% on 3/6 pathology classes |
+| **Robustness Certification** | 12 | 🥇 Gold certified (99% CI: 97.4%–100%) |
+| **QAOA Multi-Agent Coordinator** | 20 | Optimal 6-agent × 8-task allocation |
+| **Quantum Risk Scoring** | 6 | 85% accuracy on 4-tier classification |
+
+📄 **[quantum/](./quantum/)** — Paper, experiment results, visualizations, staging configs
+
 ## 🏁 CTF Events
 
 Capture-The-Flag competitions where human red teamers exploit defended AI agents.
@@ -140,6 +155,11 @@ Read-only API for programmatic access to the AVE database.
 │   ├── DEFENCE_ARCHITECTURE.md  # 5-layer defence stack
 │   ├── PAPER_ABSTRACT.md  #   Research paper abstract
 │   └── EBOOK_PREVIEW.md   #   Ebook chapter overview
+├── quantum/               # Quantum research (DGX Spark)
+│   ├── paper/             #   arXiv-style research paper
+│   ├── results/           #   Per-phase experiment summaries
+│   ├── staging/           #   Deployable quantum-optimized thresholds
+│   └── visualizations/    #   Charts, plots, certification badges
 ├── docs/                  # Documentation site (GitHub Pages)
 │   ├── _site/             #   Generated HTML (index, taxonomy, CTF, cards)
 │   └── generate.py        #   Docs site generator

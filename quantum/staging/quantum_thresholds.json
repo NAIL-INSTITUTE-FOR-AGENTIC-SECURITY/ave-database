@@ -1,0 +1,135 @@
+{
+  "_meta": {
+    "name": "Quantum-Optimized Defence Thresholds",
+    "version": "1.0.0",
+    "source": "QAOA Threshold Optimizer (Phase 1)",
+    "generated": "2026-03-25T00:11:18Z",
+    "hardware": "NVIDIA DGX Spark (20 qubits, cuQuantum lightning.gpu)",
+    "optimization": {
+      "circuit_depth": 6,
+      "trainable_params": 360,
+      "steps": 150,
+      "runtime_seconds": 790,
+      "fitness": 0.9383,
+      "ga_baseline_fitness": 0.9071,
+      "improvement": "+3.44%"
+    },
+    "certification": {
+      "level": "gold",
+      "coverage": "100%",
+      "ci_99_low": "97.4%",
+      "ci_99_high": "100%"
+    },
+    "notes": [
+      "Deploy to staging Pathology Collider before production",
+      "Validate against Nemotron-70b adversarial agents",
+      "Key correlation: memory_decay_rate ↔ alert_cooldown (discovered by entangling layers)"
+    ]
+  },
+
+  "thresholds": {
+    "trust_threshold": {
+      "value": 0.4995,
+      "range": [0.1, 0.9],
+      "description": "Epistemic trust gate — looser than GA, allows more reasoning before gating",
+      "ga_value": 0.4000,
+      "delta": "+0.0995"
+    },
+    "min_trust_floor": {
+      "value": 0.7378,
+      "range": [0.1, 0.9],
+      "description": "Memory insertion gate — MUCH STRICTER than GA, key quantum discovery",
+      "ga_value": 0.4117,
+      "delta": "+0.3261"
+    },
+    "scan_probability": {
+      "value": 0.6585,
+      "range": [0.3, 1.0],
+      "description": "Surveillance scan rate — slightly less scanning, fewer false positives",
+      "ga_value": 0.7146,
+      "delta": "-0.0561"
+    },
+    "compound_threshold": {
+      "value": 2.5868,
+      "range": [1.0, 5.0],
+      "description": "Multi-signal compound alert threshold",
+      "ga_value": 2.0000,
+      "delta": "+0.5868"
+    },
+    "spike_threshold": {
+      "value": 0.5640,
+      "range": [0.1, 0.8],
+      "description": "Token spike tolerance — more tolerance for natural variance",
+      "ga_value": 0.3000,
+      "delta": "+0.2640"
+    },
+    "burn_rate_accel": {
+      "value": 1.7563,
+      "range": [0.5, 3.0],
+      "description": "EDoS detection acceleration threshold",
+      "ga_value": 1.5000,
+      "delta": "+0.2563"
+    },
+    "drift_threshold": {
+      "value": 0.4117,
+      "range": [0.1, 0.8],
+      "description": "Persona drift tolerance — more flexibility",
+      "ga_value": 0.3000,
+      "delta": "+0.1117"
+    },
+    "manipulation_threshold": {
+      "value": 4.3132,
+      "range": [1.0, 6.0],
+      "description": "Content manipulation sensitivity — less sensitive, fewer false positives",
+      "ga_value": 3.5827,
+      "delta": "+0.7305"
+    },
+    "memory_decay_rate": {
+      "value": 0.2550,
+      "range": [0.01, 0.50],
+      "description": "Memory half-life decay coefficient — faster decay, fresher knowledge. CORRELATED with alert_cooldown.",
+      "ga_value": 0.1000,
+      "delta": "+0.1550"
+    },
+    "alert_cooldown": {
+      "value": 5.5000,
+      "range": [1.0, 10.0],
+      "description": "Minimum seconds between compound alerts — longer cooldown prevents cascade false positives. CORRELATED with memory_decay_rate.",
+      "ga_value": 3.0000,
+      "delta": "+2.5000"
+    },
+    "sentinel_sensitivity": {
+      "value": 1.4559,
+      "range": [0.1, 2.0],
+      "description": "LLM-as-Judge temperature scaling",
+      "ga_value": 1.0000,
+      "delta": "+0.4559"
+    },
+    "token_budget_margin": {
+      "value": 0.4821,
+      "range": [0.05, 0.50],
+      "description": "EDoS budget headroom factor — much more headroom",
+      "ga_value": 0.2000,
+      "delta": "+0.2821"
+    }
+  },
+
+  "metrics": {
+    "fitness": 0.9383,
+    "detection": 0.9906,
+    "corruption": 0.0218,
+    "accuracy": 0.7931,
+    "drift": 0.0996
+  },
+
+  "deployment": {
+    "environment": "staging",
+    "target": "pathology-collider",
+    "validation_required": [
+      "Nemotron-70b adversarial validation",
+      "48-hour soak test under mixed workload",
+      "Comparison with GA thresholds on identical adversarial corpus"
+    ],
+    "rollback": "ga_g1_8241_thresholds.json"
+  }
+}
