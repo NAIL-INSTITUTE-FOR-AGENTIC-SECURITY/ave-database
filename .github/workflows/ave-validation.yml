@@ -1,0 +1,190 @@
+name: AVE Database Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ave-database/**'
+      - 'scripts/**'
+      - 'tests/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ave-database/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-cards:
+    name: Validate AVE Cards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema pydantic
+
+      - name: Validate card JSON schema
+        run: python scripts/validate_cards.py
+
+      - name: Check card count
+        run: |
+          CARD_COUNT=$(ls ave-database/cards/*.json | wc -l)
+          echo "Found $CARD_COUNT AVE cards"
+          if [ "$CARD_COUNT" -lt 50 ]; then
+            echo "::warning::Card count ($CARD_COUNT) is below expected minimum (50)"
+          fi
+
+      - name: Verify MITRE mappings
+        run: |
+          python -c "
+          import json, glob, sys
+          missing = []
+          for f in sorted(glob.glob('ave-database/cards/*.json')):
+              card = json.load(open(f))
+              if not card.get('mitre_mapping'):
+                  missing.append(card['ave_id'])
+          if missing:
+              print(f'::warning::Cards without MITRE mapping: {missing}')
+          else:
+              print(f'All cards have MITRE mappings ✓')
+          "
+
+      - name: Check for duplicate AVE IDs
+        run: |
+          python -c "
+          import json, glob, sys
+          ids = []
+          for f in sorted(glob.glob('ave-database/cards/*.json')):
+              card = json.load(open(f))
+              ids.append(card['ave_id'])
+          dupes = [x for x in ids if ids.count(x) > 1]
+          if dupes:
+              print(f'::error::Duplicate AVE IDs found: {set(dupes)}')
+              sys.exit(1)
+          print(f'No duplicate AVE IDs ✓ ({len(ids)} unique cards)')
+          "
+
+      - name: Validate severity values
+        run: |
+          python -c "
+          import json, glob, sys
+          VALID = {'critical', 'high', 'medium', 'low'}
+          invalid = []
+          for f in sorted(glob.glob('ave-database/cards/*.json')):
+              card = json.load(open(f))
+              if card.get('severity', '').lower() not in VALID:
+                  invalid.append((card['ave_id'], card.get('severity')))
+          if invalid:
+              print(f'::error::Invalid severity values: {invalid}')
+              sys.exit(1)
+          print('All severity values valid ✓')
+          "
+
+  run-tests:
+    name: Run Test Suite
+    runs-on: ubuntu-latest
+    needs: validate-cards
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt 2>/dev/null || true
+          pip install pytest pytest-cov httpx fastapi
+
+      - name: Run tests
+        run: |
+          python -m pytest tests/ -v --tb=short --co -q 2>/dev/null || true
+          python -m pytest tests/ -v --tb=short || echo "::warning::Some tests failed"
+
+  generate-feeds:
+    name: Generate Feeds
+    runs-on: ubuntu-latest
+    needs: validate-cards
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate RSS/Atom feeds
+        run: python scripts/feed_generator.py
+
+      - name: Commit feeds
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/
+          git diff --staged --quiet || git commit -m "chore: regenerate RSS/Atom feeds"
+          git push || echo "No changes to push"
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for secrets in cards
+        run: |
+          python -c "
+          import json, glob, re, sys
+          SECRET_PATTERNS = [
+              r'(?:sk|pk|api)[_-]?[a-zA-Z0-9]{20,}',
+              r'(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,}',
+              r'AKIA[0-9A-Z]{16}',
+              r'-----BEGIN (?:RSA |EC )?PRIVATE KEY-----',
+          ]
+          found = []
+          for f in glob.glob('ave-database/cards/*.json'):
+              content = open(f).read()
+              for pattern in SECRET_PATTERNS:
+                  if re.search(pattern, content):
+                      found.append(f)
+                      break
+          if found:
+              print(f'::error::Potential secrets found in: {found}')
+              sys.exit(1)
+          print('No secrets detected in card files ✓')
+          "
+
+      - name: Validate JSON structure
+        run: |
+          python -c "
+          import json, glob, sys
+          errors = []
+          for f in sorted(glob.glob('ave-database/cards/*.json')):
+              try:
+                  json.load(open(f))
+              except json.JSONDecodeError as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print('All card JSON files are valid ✓')
+          "

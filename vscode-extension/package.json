@@ -1,0 +1,130 @@
+{
+  "name": "nail-ave-browser",
+  "displayName": "NAIL AVE Browser",
+  "description": "Browse and search the NAIL Institute Agentic Vulnerability Enumeration (AVE) database directly from VS Code.",
+  "version": "0.1.0",
+  "publisher": "nail-institute",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-SECURITY/ave-database"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Education"
+  ],
+  "keywords": [
+    "security",
+    "ai",
+    "agents",
+    "vulnerability",
+    "agentic",
+    "LLM",
+    "MITRE",
+    "AVE"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onView:aveExplorer"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ave-browser",
+          "title": "AVE Database",
+          "icon": "media/shield.svg"
+        }
+      ]
+    },
+    "views": {
+      "ave-browser": [
+        {
+          "id": "aveExplorer",
+          "name": "AVE Cards",
+          "icon": "media/shield.svg"
+        },
+        {
+          "id": "aveSeverity",
+          "name": "By Severity",
+          "icon": "media/shield.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ave.refresh",
+        "title": "Refresh AVE Database",
+        "category": "AVE",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "ave.search",
+        "title": "Search AVE Cards",
+        "category": "AVE",
+        "icon": "$(search)"
+      },
+      {
+        "command": "ave.showCard",
+        "title": "Show AVE Card Details",
+        "category": "AVE"
+      },
+      {
+        "command": "ave.openMitre",
+        "title": "Open MITRE Mapping",
+        "category": "AVE"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "ave.refresh",
+          "when": "view == aveExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "ave.search",
+          "when": "view == aveExplorer",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "NAIL AVE Browser",
+      "properties": {
+        "ave.apiUrl": {
+          "type": "string",
+          "default": "https://api.nailinstitute.org",
+          "description": "AVE Database API endpoint"
+        },
+        "ave.showSeverityIcons": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show severity icons in the tree view"
+        },
+        "ave.autoRefresh": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-refresh AVE database on activation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -48,9 +48,9 @@
 
 ---
 
-## 🔄 In Progress
+## ✅ Completed (continued)
 
-### Phase 5: Ecosystem Expansion
+### Phase 5: Ecosystem Expansion (Complete)
 
 - [x] **arXiv Pre-print** — Full research paper published (publications/arxiv/)
 - [x] **API Deployment** — Public API live at api.nailinstitute.org (Fly.io)
@@ -65,21 +65,21 @@
 - [x] **Quantum Multi-Agent Coordination** — QAOA task allocator validated at 6-agent scale
 - [x] **Quantum Risk Scoring** — VQC achieves 85% on 4-tier underwriting classification
 - [x] **Quantum Research Publication** — Full paper, results, visualizations, staging configs
-- [ ] **AVE-to-MITRE Mapping** — Formal mapping between AVE cards and MITRE ATT&CK / ATLAS techniques
-- [ ] **Framework Integration Guides** — Step-by-step hardening guides for LangChain, CrewAI, AutoGen, LlamaIndex
+- [x] **AVE-to-MITRE Mapping** — All 50 cards mapped to MITRE ATT&CK / ATLAS techniques (research/AVE_MITRE_MAPPING.md)
+- [x] **Framework Integration Guides** — Hardening guides for LangChain, CrewAI, AutoGen, LlamaIndex (research/framework-guides/)
+
+### Phase 6: Industry Adoption (Complete)
+
+- [x] **AVE Feed (RSS/Atom)** — RSS 2.0 and Atom feeds generated from card database (feeds/)
+- [x] **IDE Extensions** — VS Code extension with tree view, search, card details, MITRE links (vscode-extension/)
+- [x] **CI/CD Integration** — GitHub Action validates cards, checks MITRE mappings, runs tests (.github/workflows/)
+- [x] **SBOM Integration** — AI-SBOM generator with CycloneDX format and AVE vulnerability mapping (sbom/)
+- [x] **Partner Programme** — 4-tier programme with certification, responsible disclosure policy (PARTNER_PROGRAMME.md)
+- [x] **Enterprise CTF** — 12-challenge pack across 4 tiers, 3,900 total points (ctf/)
 
 ---
 
 ## 📋 Planned
-
-### Phase 6: Industry Adoption
-
-- [ ] **AVE Feed (RSS/Atom)** — Machine-readable vulnerability feed for security tooling
-- [ ] **IDE Extensions** — VS Code extension for AVE card lookup during development
-- [ ] **CI/CD Integration** — GitHub Action: "Scan my agent code for AVE vulnerabilities"
-- [ ] **SBOM Integration** — AVE references in Software Bill of Materials
-- [ ] **Partner Programme** — Framework maintainers can link mitigations to AVE cards
-- [ ] **Enterprise CTF** — Private red team assessments for enterprise AI deployments
 
 ### Phase 7: Research Scaling
 
@@ -115,13 +115,13 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 
 | Metric | Current | Target (EOY 2026) |
 |--------|---------|-------------------|
-| AVE Cards | 36 | 100+ |
+| AVE Cards | 50 | 100+ |
 | Contributors | 5 | 50+ |
 | GitHub Stars | — | 1,000+ |
-| Categories | 14 | 20+ |
-| CTF Events | 0 | 4+ |
-| Published Papers | 0 | 3+ |
-| Framework Integrations | 0 | 5+ |
+| Categories | 13 | 20+ |
+| CTF Events | 1 | 4+ |
+| Published Papers | 1 | 3+ |
+| Framework Integrations | 4 | 5+ |
 | Weekly Digest Subscribers | 0 | 500+ |
 
 ---

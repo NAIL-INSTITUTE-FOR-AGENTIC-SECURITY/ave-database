@@ -38,7 +38,7 @@
   "date_discovered": "2025-03",
   "date_published": "",
   "cwe_mapping": "CWE-441 (Unintended Proxy or Intermediary / Confused Deputy)",
-  "mitre_mapping": "",
+  "mitre_mapping": "ATT&CK: T1078, T1068 | ATLAS: AML.T0043",
   "references": [],
   "related_aves": [
     "AVE-2025-0014",

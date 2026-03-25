@@ -40,7 +40,7 @@
   "date_discovered": "2025-03",
   "date_published": "",
   "cwe_mapping": "",
-  "mitre_mapping": "",
+  "mitre_mapping": "ATT&CK: T1048 | ATLAS-NOVEL: Agent Collusion",
   "references": [],
   "related_aves": [
     "AVE-2025-0027"

@@ -46,7 +46,7 @@
   "date_discovered": "2025-01",
   "date_published": "",
   "cwe_mapping": "",
-  "mitre_mapping": "",
+  "mitre_mapping": "ATT&CK: T1499, T1496 | ATLAS: AML.T0034",
   "references": [],
   "related_aves": [
     "AVE-2025-0035",

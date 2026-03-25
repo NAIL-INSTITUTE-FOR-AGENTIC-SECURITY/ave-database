@@ -64,7 +64,7 @@
   "date_discovered": "2025-01",
   "date_published": "",
   "cwe_mapping": "",
-  "mitre_mapping": "",
+  "mitre_mapping": "ATLAS-NOVEL: Consensus Paralysis (multi-agent voting pathology)",
   "references": [],
   "related_aves": [
     "AVE-2025-0021",

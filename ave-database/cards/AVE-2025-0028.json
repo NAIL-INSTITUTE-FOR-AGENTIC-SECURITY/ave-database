@@ -38,7 +38,7 @@
   "date_discovered": "2025-03",
   "date_published": "",
   "cwe_mapping": "CWE-200 (Exposure of Sensitive Information to an Unauthorized Actor)",
-  "mitre_mapping": "",
+  "mitre_mapping": "ATT&CK: T1003, T1552",
   "references": [],
   "related_aves": [
     "AVE-2025-0026",
