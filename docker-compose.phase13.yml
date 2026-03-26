@@ -1,0 +1,96 @@
+version: "3.9"
+
+# =============================================================================
+# Phase 13: Autonomous Ecosystem & Global Scale
+# =============================================================================
+
+services:
+  # -------------------------------------------------------------------------
+  # 1. Self-Healing Defence Mesh
+  # -------------------------------------------------------------------------
+  defence-mesh:
+    build:
+      context: ./defence-mesh
+      dockerfile: ../Dockerfile.fastapi
+    ports:
+      - "8700:8700"
+    environment:
+      - SERVICE_NAME=defence-mesh
+      - PORT=8700
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8700/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # -------------------------------------------------------------------------
+  # 2. AVE Vulnerability Marketplace
+  # -------------------------------------------------------------------------
+  vuln-marketplace:
+    build:
+      context: ./vuln-marketplace
+      dockerfile: ../Dockerfile.fastapi
+    ports:
+      - "8701:8701"
+    environment:
+      - SERVICE_NAME=vuln-marketplace
+      - PORT=8701
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8701/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # -------------------------------------------------------------------------
+  # 3. Real-Time Global Threat Map
+  # -------------------------------------------------------------------------
+  global-threat-map:
+    build:
+      context: ./global-threat-map
+      dockerfile: ../Dockerfile.fastapi
+    ports:
+      - "8702:8702"
+    environment:
+      - SERVICE_NAME=global-threat-map
+      - PORT=8702
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8702/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # -------------------------------------------------------------------------
+  # 4. Cross-Framework Compatibility Layer
+  # -------------------------------------------------------------------------
+  framework-compat:
+    build:
+      context: ./framework-compat
+      dockerfile: ../Dockerfile.fastapi
+    ports:
+      - "8703:8703"
+    environment:
+      - SERVICE_NAME=framework-compat
+      - PORT=8703
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8703/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # -------------------------------------------------------------------------
+  # 5. Autonomous Governance Engine
+  # -------------------------------------------------------------------------
+  governance-engine:
+    build:
+      context: ./governance-engine
+      dockerfile: ../Dockerfile.fastapi
+    ports:
+      - "8704:8704"
+    environment:
+      - SERVICE_NAME=governance-engine
+      - PORT=8704
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8704/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

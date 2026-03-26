@@ -151,15 +151,27 @@
 
 ---
 
+## ✅ Completed (continued)
+
+### Phase 13: Autonomous Ecosystem & Global Scale (Complete)
+
+- [x] **Self-Healing Defence Mesh** — Distributed defence network with autonomous failure detection (heartbeat + anomaly scoring), Byzantine-tolerant quorum consensus (configurable 60% threshold), automatic node isolation and recovery (5 strategies: restart, config rollback, promote standby, replace, full rebuild), dynamic load rebalancing, BFS-based partition detection and healing, 6 node roles (guardrail/monitor/router/sentinel/coordinator), 6 seed nodes across 2 regions, synthetic failure injection for testing, MTTR tracking, full mesh event audit trail, topology visualization with real-time node state (defence-mesh/)
+- [x] **AVE Vulnerability Marketplace** — Bounty platform with 4-tier rewards (Bronze $500 → Platinum $10,000), 5 bounty multipliers (novel category ×2.0, PoC ×1.5, defence ×1.25, multi-framework ×1.5, real-world ×1.75) with tier-capped totals, 5-stage verification pipeline (triage → reproduce → validate → score → reward), auto AVSS scoring heuristic, SHA-256 duplicate detection, 90-day responsible disclosure embargo with coordinated timeline, researcher reputation system (newcomer → contributor → expert → elite) with accuracy tracking, bounty programme management, transparent payout ledger, marketplace analytics (vuln-marketplace/)
+- [x] **Real-Time Global Threat Map** — Live geospatial threat visualization with 18 cities across 6 world regions (NA/EU/APAC/LATAM/MEA/CIS), density-based heat map generation with severity weighting, source→target attack flow tracking, per-region intelligence overlays with daily trend analysis (rising/falling/stable), configurable alert zones with threshold-based triggering (count × severity × window), 4-level alerting (green/yellow/orange/red), time-series bucketed timeline (1h/6h/1d/7d intervals), historical map replay at any timestamp, 20 seed threats spanning all 18 AVE categories, GeoJSON-compatible output (global-threat-map/)
+- [x] **Cross-Framework Compatibility Layer** — Abstract Defence Language (ADL) enabling framework-agnostic guardrail definitions, 5 framework adapters (LangChain callbacks, CrewAI task hooks, AutoGen reply filters, LlamaIndex event handlers, custom user-defined), 15 hook points (pre/post input/output/tool/chain, retrieval, memory read/write, agent init/shutdown, error), 10 defence types (input filter, output validator, tool sandbox, memory guard, rate limiter, role lock, DLP, anomaly detector, trust boundary, content classifier), ADL→native config translation with framework-specific class generation, defence profile bundling and deployment with dry-run support, cross-framework telemetry aggregation with p95 latency and block rates, full compatibility matrix, ADL validation engine (framework-compat/)
+- [x] **Autonomous Governance Engine** — AI-assisted policy engine with 10 governance domains (data privacy, model safety, tool security, agent autonomy, human oversight, transparency, accountability, fairness, robustness, incident response), condition→action policy rules with configurable enforcement levels (mandatory/recommended/optional/emergency), organisation-specific risk appetite profiles with floor/ceiling thresholds and auto-adjust, 4 regulatory framework mappings (NIST AI RMF, EU AI Act, ISO 42001, OWASP LLM Top 10), full governance evaluation loop updating domain metrics and triggering policy actions, what-if simulation with risk delta and compliance impact projection, threat signal ingestion updating governance context, human escalation for risk appetite breaches, decision audit log with rollback capability, 8 seed policies covering prompt injection defence, DLP, tool governance, human oversight, transparency, incident response, fairness, robustness (governance-engine/)
+
+---
+
 ## 📋 Planned
 
-### Phase 13: Autonomous Ecosystem & Global Scale
+### Phase 14: Sentient Infrastructure & Ecosystem Intelligence
 
-- [ ] **Self-Healing Defence Mesh** — Distributed defence network that autonomously detects, isolates, and recovers from compromised nodes without human intervention
-- [ ] **AVE Vulnerability Marketplace** — Bounty platform for responsible disclosure of novel agentic AI vulnerabilities with reward tiers and verification pipeline
-- [ ] **Real-Time Global Threat Map** — Live geospatial visualisation of agentic AI threats worldwide with heat maps, attack flow animations, and regional intelligence overlays
-- [ ] **Cross-Framework Compatibility Layer** — Universal defence adapter enabling guardrails to work across LangChain, CrewAI, AutoGen, LlamaIndex, and custom agent frameworks
-- [ ] **Autonomous Governance Engine** — AI-assisted policy engine that dynamically adjusts organisational AI governance based on threat landscape, compliance requirements, and risk tolerance
+- [ ] **Self-Evolving Defence Catalogue** — Defence library that autonomously generates, tests, and publishes new guardrails in response to novel vulnerability classes discovered by the ecosystem
+- [ ] **Cross-Organisation Threat Federation** — Zero-trust multi-tenant threat sharing network enabling organisations to contribute and consume anonymised threat intelligence without revealing internal architecture
+- [ ] **AVE Digital Twin** — Full simulation of an organisation's agentic AI stack for red/blue team exercises, policy testing, and compliance rehearsal in a sandboxed environment
+- [ ] **Cognitive Threat Modelling** — AI system that models attacker intent, capability, and opportunity to predict not just what vulnerabilities will emerge but which will be exploited
+- [ ] **Governance-as-Code Pipeline** — CI/CD integration that enforces governance policies as code gates, blocking deployments that violate risk appetite or compliance requirements
 
 ---
 
