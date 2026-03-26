@@ -1,0 +1,101 @@
+###############################################################################
+# Phase 15 — Quantum-Resilient Autonomy & Global Collective Intelligence
+#
+# Five micro-services — ports 8900-8904
+#
+#   quantum-crypto        8900  Quantum-Safe Cryptography Layer
+#   collective-swarm      8901  Collective Intelligence Swarm
+#   adversarial-benchmark 8902  Adversarial Resilience Benchmark
+#   compliance-autopilot  8903  Regulatory Compliance Autopilot
+#   universal-sdk         8904  Universal Defence SDK
+#
+# Usage:
+#   docker compose -f docker-compose.phase15.yml up --build
+###############################################################################
+
+version: "3.9"
+
+x-common: &common
+  restart: unless-stopped
+  networks: [nail-phase15]
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:$${PORT}/health')"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 15s
+
+services:
+  # ---- 1. Quantum-Safe Cryptography Layer --------------------------------
+  quantum-crypto:
+    <<: *common
+    build:
+      context: ./quantum-crypto
+      dockerfile: ../Dockerfile
+    container_name: nail-quantum-crypto
+    ports:
+      - "8900:8900"
+    environment:
+      - PORT=8900
+      - SERVICE_NAME=quantum-crypto
+    command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8900"]
+
+  # ---- 2. Collective Intelligence Swarm ----------------------------------
+  collective-swarm:
+    <<: *common
+    build:
+      context: ./collective-swarm
+      dockerfile: ../Dockerfile
+    container_name: nail-collective-swarm
+    ports:
+      - "8901:8901"
+    environment:
+      - PORT=8901
+      - SERVICE_NAME=collective-swarm
+    command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8901"]
+
+  # ---- 3. Adversarial Resilience Benchmark --------------------------------
+  adversarial-benchmark:
+    <<: *common
+    build:
+      context: ./adversarial-benchmark
+      dockerfile: ../Dockerfile
+    container_name: nail-adversarial-benchmark
+    ports:
+      - "8902:8902"
+    environment:
+      - PORT=8902
+      - SERVICE_NAME=adversarial-benchmark
+    command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8902"]
+
+  # ---- 4. Regulatory Compliance Autopilot ---------------------------------
+  compliance-autopilot:
+    <<: *common
+    build:
+      context: ./compliance-autopilot
+      dockerfile: ../Dockerfile
+    container_name: nail-compliance-autopilot
+    ports:
+      - "8903:8903"
+    environment:
+      - PORT=8903
+      - SERVICE_NAME=compliance-autopilot
+    command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8903"]
+
+  # ---- 5. Universal Defence SDK -------------------------------------------
+  universal-sdk:
+    <<: *common
+    build:
+      context: ./universal-sdk
+      dockerfile: ../Dockerfile
+    container_name: nail-universal-sdk
+    ports:
+      - "8904:8904"
+    environment:
+      - PORT=8904
+      - SERVICE_NAME=universal-sdk
+    command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8904"]
+
+networks:
+  nail-phase15:
+    driver: bridge
