@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nailinstitute.org/schemas/knowledge-graph-v1.0.0.json",
+  "title": "NAIL AVE Knowledge Graph Schema",
+  "description": "Defines node types and relationship types for the AVE Knowledge Graph.",
+  "type": "object",
+  "definitions": {
+    "node_ave_card": {
+      "type": "object",
+      "required": ["ave_id", "title"],
+      "properties": {
+        "ave_id": {
+          "type": "string",
+          "pattern": "^AVE-\\d{4}-\\d{4,}$"
+        },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "info"]
+        },
+        "avss_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "published", "draft", "deprecated", "under-review",
+            "proven", "proven_mitigated", "not_proven",
+            "theoretical", "confirmed", "disputed"
+          ]
+        },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "node_category": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "prompt_injection", "tool_abuse", "memory_poisoning",
+            "identity_spoofing", "goal_hijacking", "knowledge_poisoning",
+            "resource_exhaustion", "output_manipulation", "privilege_escalation",
+            "trust_exploitation", "context_overflow", "model_denial_of_service",
+            "data_exfiltration", "supply_chain", "model_poisoning",
+            "multi_agent_coordination", "reward_hacking", "emergent_behavior"
+          ]
+        },
+        "description": { "type": "string" }
+      }
+    },
+    "node_mitre_technique": {
+      "type": "object",
+      "required": ["technique_id", "name"],
+      "properties": {
+        "technique_id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "node_mitre_tactic": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "tactic_id": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    },
+    "node_cwe": {
+      "type": "object",
+      "required": ["cwe_id", "name"],
+      "properties": {
+        "cwe_id": { "type": "string", "pattern": "^CWE-\\d+$" },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "node_framework": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "vendor": { "type": "string" }
+      }
+    },
+    "node_framework_version": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "release_date": { "type": "string", "format": "date" }
+      }
+    },
+    "node_defence": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "effectiveness": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        }
+      }
+    },
+    "node_paper": {
+      "type": "object",
+      "required": ["doi", "title"],
+      "properties": {
+        "doi": { "type": "string" },
+        "title": { "type": "string" },
+        "authors": { "type": "array", "items": { "type": "string" } },
+        "year": { "type": "integer" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "node_incident": {
+      "type": "object",
+      "required": ["incident_id", "title"],
+      "properties": {
+        "incident_id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      }
+    },
+    "relationship_types": {
+      "type": "string",
+      "enum": [
+        "BELONGS_TO",
+        "HAS_SEVERITY",
+        "MAPS_TO_TECHNIQUE",
+        "MAPS_TO_CWE",
+        "AFFECTS",
+        "MITIGATED_BY",
+        "ANALYSED_BY",
+        "EXPLOITED_IN",
+        "DISCOVERED_BY",
+        "VERSION_OF",
+        "TECHNIQUE_OF",
+        "CHILD_OF",
+        "ENABLES",
+        "SUPERSEDES",
+        "RELATED_TO"
+      ]
+    }
+  }
+}

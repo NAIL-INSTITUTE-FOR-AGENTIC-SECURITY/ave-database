@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nailinstitute.org/schemas/stix-ave-extensions-v1.0.0.json",
+  "title": "STIX 2.1 AVE Extension Properties",
+  "description": "Custom STIX properties used in NAIL AVE threat intelligence objects.",
+  "type": "object",
+  "definitions": {
+    "x_ave_vulnerability_extension": {
+      "type": "object",
+      "description": "Extension properties for STIX Vulnerability objects generated from AVE cards.",
+      "properties": {
+        "x_ave_id": {
+          "type": "string",
+          "pattern": "^AVE-\\d{4}-\\d{4,}$",
+          "description": "Original AVE card identifier."
+        },
+        "x_ave_category": {
+          "type": "string",
+          "enum": [
+            "prompt_injection", "tool_abuse", "memory_poisoning",
+            "identity_spoofing", "goal_hijacking", "knowledge_poisoning",
+            "resource_exhaustion", "output_manipulation", "privilege_escalation",
+            "trust_exploitation", "context_overflow", "model_denial_of_service",
+            "data_exfiltration", "supply_chain", "model_poisoning",
+            "multi_agent_coordination", "reward_hacking", "emergent_behavior"
+          ],
+          "description": "AVE vulnerability category."
+        },
+        "x_ave_status": {
+          "type": "string",
+          "enum": [
+            "published", "draft", "deprecated", "under-review",
+            "proven", "proven_mitigated", "not_proven",
+            "theoretical", "confirmed", "disputed"
+          ],
+          "description": "AVE card publication status."
+        },
+        "x_avss_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "AVSS (Agentic Vulnerability Severity Score)."
+        },
+        "x_avss_severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "info"],
+          "description": "Human-readable severity derived from AVSS score."
+        },
+        "x_avss_vector": {
+          "type": "string",
+          "description": "AVSS scoring vector string."
+        },
+        "x_affected_systems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "vendor": { "type": "string" },
+              "version": { "type": "string" }
+            }
+          },
+          "description": "Systems affected by this vulnerability."
+        },
+        "x_ave_schema_version": {
+          "type": "string",
+          "description": "AVE schema version used for the source card."
+        }
+      }
+    },
+    "x_ave_attack_pattern_extension": {
+      "type": "object",
+      "description": "Extension properties for STIX Attack Pattern objects.",
+      "properties": {
+        "x_ave_category": {
+          "type": "string",
+          "description": "AVE vulnerability category this attack pattern belongs to."
+        },
+        "x_technique_variants": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known technique variants within this category."
+        }
+      }
+    },
+    "x_ave_course_of_action_extension": {
+      "type": "object",
+      "description": "Extension properties for STIX Course of Action objects.",
+      "properties": {
+        "x_implementation": {
+          "type": "string",
+          "description": "Implementation guidance for the defence."
+        },
+        "x_effectiveness": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"],
+          "description": "Expected effectiveness of the defence."
+        },
+        "x_deployment_complexity": {
+          "type": "string",
+          "enum": ["trivial", "low", "medium", "high", "very_high"],
+          "description": "Complexity of deploying this defence."
+        }
+      }
+    }
+  }
+}

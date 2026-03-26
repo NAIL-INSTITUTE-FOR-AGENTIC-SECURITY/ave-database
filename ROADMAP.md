@@ -127,15 +127,27 @@
 
 ---
 
+## ✅ Completed (continued)
+
+### Phase 11: Autonomous Defence & Real-Time Intelligence (Complete)
+
+- [x] **AVE Live Feed** — Real-time streaming API with WebSocket (`/ws/feed`) and SSE (`/v1/feed/stream`) endpoints, Redis pub/sub backend, JWT authentication, channel-based filtering (severity/category/status), reconnection with replay via `Last-Event-ID`, rate limiting, Python client library with auto-reconnect (live-feed/)
+- [x] **Autonomous Red Team Agent** — Self-directed ARTA agent with LangGraph orchestrator, 5 campaign types (framework audit, category sweep, multi-agent, regression, continuous monitoring), attack technique library covering 6 AVE categories, automated AVSS scoring, MITRE/CWE mapping, defence recommendation engine, AVE card generator, safety guardrails with kill switch and ethical gates (autonomous-redteam/)
+- [x] **Defence Orchestration Platform** — Automated guardrail/monitor lifecycle management with 6 guardrail types, 5 monitor types, declarative defence profiles, automated playbooks triggered by AVE events, canary/staged/full deployment lifecycle with auto-rollback, AVE coverage gap analysis, JSON Schema for profile validation (defence-orchestration/)
+- [x] **Threat Intelligence Sharing (STIX/TAXII)** — Native TAXII 2.1 server with 6 collections, AVE-to-STIX translator (Vulnerability, Attack Pattern, Course of Action, Relationship objects), filtering/pagination, tiered API key auth, community contribution collection, STIX extension schema for AVE custom properties (threat-intel/)
+- [x] **AVE Knowledge Graph** — Neo4j graph database with 10 node types, 15 relationship types, full-text search, shortest path queries, N-hop neighbour traversal, impact analysis, multi-step attack chain discovery, defence coverage matrix, framework risk profiles, temporal trend analysis, Cypher query examples, graph schema JSON definition (knowledge-graph/)
+
+---
+
 ## 📋 Planned
 
-### Phase 11: Autonomous Defence & Real-Time Intelligence
+### Phase 12: Adaptive Intelligence & Ecosystem Convergence
 
-- [ ] **AVE Live Feed** — Real-time streaming API (WebSocket/SSE) for instant vulnerability notifications with filtering and prioritisation
-- [ ] **Autonomous Red Team Agent** — Self-directed AI agent that discovers and catalogues new agentic AI vulnerabilities using the AVE taxonomy
-- [ ] **Defence Orchestration Platform** — Automated deployment and management of guardrails, monitors, and circuit-breakers based on AVE intelligence
-- [ ] **Threat Intelligence Sharing (STIX/TAXII)** — Native TAXII 2.1 server for bidirectional threat intelligence exchange with ISACs and CERTs
-- [ ] **AVE Knowledge Graph** — Graph database (Neo4j) linking AVE cards, MITRE techniques, CWEs, frameworks, defences, and research papers for advanced querying
+- [ ] **Predictive Vulnerability Engine** — ML model trained on AVE history to predict emerging vulnerability categories before they manifest in the wild
+- [ ] **AVE Compliance Dashboard** — Real-time web dashboard showing organizational compliance posture against AVE taxonomy, regulatory mappings, and defence coverage
+- [ ] **Federated Threat Intelligence Network** — Decentralized peer-to-peer intelligence sharing between NAIL chapters, ISACs, and partner organizations
+- [ ] **AVE Simulation Sandbox** — Interactive web environment for safely reproducing and studying AVE vulnerabilities in sandboxed agent configurations
+- [ ] **Autonomous Defence Agent** — AI agent that continuously monitors deployed systems and auto-deploys/tunes defences from the Defence Orchestration Platform
 
 ---
 
@@ -167,7 +179,7 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 | Study Protocols | 5 | 15+ |
 | Certification Tiers | 4 | 4 |
 | Regulatory Mappings | 4 | 8+ |
-| RFC Specifications | 1 | 5+ |
+| RFC Specifications | 2 | 5+ |
 | Regional Chapters | 3 | 6+ |
 | Academic Course Modules | 10 | 20+ |
 | Vendor Integrations | 3 | 8+ |
@@ -179,6 +191,11 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 | Conference Talks | 4 | 8+ |
 | Revenue Streams | 5 | 5+ |
 | Grant Target Funders | 15 | 20+ |
+| Real-Time Feed Transports | 2 | 3+ |
+| STIX Collections | 6 | 10+ |
+| Knowledge Graph Node Types | 10 | 15+ |
+| Attack Technique Families | 8 | 20+ |
+| Defence Profile Types | 6 | 10+ |
 
 ---
 

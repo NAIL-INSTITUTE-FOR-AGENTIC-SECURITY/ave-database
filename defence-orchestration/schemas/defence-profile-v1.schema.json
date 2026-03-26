@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nailinstitute.org/schemas/defence-profile-v1.0.0.json",
+  "title": "NAIL Defence Profile Schema",
+  "description": "Declarative specification of defence guardrails, monitors, and playbooks for agentic AI systems.",
+  "type": "object",
+  "required": ["name", "version", "target_agents"],
+  "additionalProperties": false,
+  "properties": {
+    "profile_id": {
+      "type": "string",
+      "description": "Unique identifier for the profile."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Human-readable profile name."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the profile."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "target_agents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Agent identifiers this profile applies to."
+    },
+    "guardrails": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/guardrail" },
+      "description": "Guardrail configurations."
+    },
+    "monitors": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/monitor" },
+      "description": "Monitor configurations."
+    },
+    "playbooks": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/playbook" },
+      "description": "Automated response playbooks."
+    },
+    "deployment_status": {
+      "type": "string",
+      "enum": ["draft", "canary", "staged", "full", "rolled_back", "disabled"],
+      "default": "draft"
+    },
+    "deployment_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "ave_trigger": {
+      "type": "object",
+      "properties": {
+        "ave_id": {
+          "type": "string",
+          "pattern": "^AVE-\\d{4}-\\d{4,}$",
+          "description": "Specific AVE card ID that triggers this defence."
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "prompt_injection", "tool_abuse", "memory_poisoning",
+            "identity_spoofing", "goal_hijacking", "knowledge_poisoning",
+            "resource_exhaustion", "output_manipulation", "privilege_escalation",
+            "trust_exploitation", "context_overflow", "model_denial_of_service",
+            "data_exfiltration", "supply_chain", "model_poisoning",
+            "multi_agent_coordination", "reward_hacking", "emergent_behavior"
+          ]
+        },
+        "min_severity": {
+          "type": "string",
+          "enum": ["info", "low", "medium", "high", "critical"]
+        }
+      },
+      "anyOf": [
+        { "required": ["ave_id"] },
+        { "required": ["category"] }
+      ]
+    },
+    "guardrail": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "guardrail_id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": [
+            "input_filter", "output_filter", "tool_guard",
+            "memory_guard", "delegation_guard", "context_guard"
+          ]
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "config": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Guardrail-specific configuration."
+        },
+        "action": {
+          "type": "string",
+          "enum": ["block", "block_and_log", "log", "redact", "throttle", "alert", "deny_and_alert"],
+          "default": "block_and_log"
+        },
+        "ave_triggers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ave_trigger" }
+        },
+        "enabled": { "type": "boolean", "default": true }
+      }
+    },
+    "monitor": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "monitor_id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": [
+            "anomaly_detector", "behaviour_monitor", "circuit_breaker",
+            "compliance_monitor", "cost_monitor"
+          ]
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "config": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "ave_triggers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ave_trigger" }
+        },
+        "enabled": { "type": "boolean", "default": true }
+      }
+    },
+    "playbook_action": {
+      "type": "object",
+      "required": ["action_type"],
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "description": "e.g. enable_guardrail, set_circuit_breaker, notify, log"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "playbook": {
+      "type": "object",
+      "required": ["name", "trigger", "actions"],
+      "properties": {
+        "playbook_id": { "type": "string" },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "trigger": {
+          "type": "object",
+          "properties": {
+            "ave_severity": {
+              "type": "string",
+              "enum": ["info", "low", "medium", "high", "critical"]
+            },
+            "ave_category": { "type": "string" },
+            "event_type": { "type": "string" }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/playbook_action" },
+          "minItems": 1
+        },
+        "enabled": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}

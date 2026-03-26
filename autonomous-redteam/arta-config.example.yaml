@@ -1,0 +1,85 @@
+# Example ARTA configuration
+# Copy to arta-config.yaml and customize for your environment
+
+agent:
+  name: "ARTA-001"
+  model: "gpt-4o"                       # LLM for agent reasoning
+  max_concurrent_probes: 5              # Parallel probe limit
+  human_in_the_loop: true               # Require human approval for critical actions
+  log_level: "INFO"                     # DEBUG, INFO, WARNING, ERROR
+
+targets:
+  - name: "example-langchain-agent"
+    framework: "langchain"
+    version: "0.2.x"
+    endpoint: "http://localhost:8080/agent"
+    authorized: true                    # REQUIRED: must be explicitly true
+    scope:
+      categories: "all"                 # "all" or list of AVE categories
+      max_probe_rate: 10                # Maximum probes per minute
+      allow_tool_execution: true        # Allow testing tool-related attacks
+      allow_memory_modification: false  # Allow testing memory poisoning
+
+  - name: "example-autogen-system"
+    framework: "autogen"
+    version: "0.3.x"
+    endpoint: "http://localhost:8081/chat"
+    authorized: true
+    scope:
+      categories:
+        - "prompt_injection"
+        - "tool_abuse"
+        - "multi_agent_coordination"
+        - "trust_exploitation"
+      max_probe_rate: 5
+      allow_tool_execution: true
+      allow_memory_modification: false
+
+campaigns:
+  - type: "framework_audit"
+    target: "example-langchain-agent"
+    categories: "all"
+    depth: "comprehensive"              # comprehensive | lightweight | exhaustive
+    schedule: "weekly"                  # weekly | daily | once | always
+
+  - type: "category_sweep"
+    target: "example-langchain-agent"
+    categories:
+      - "prompt_injection"
+    depth: "exhaustive"
+    schedule: "monthly"
+
+  - type: "multi_agent"
+    target: "example-autogen-system"
+    categories:
+      - "multi_agent_coordination"
+      - "trust_exploitation"
+      - "goal_hijacking"
+    depth: "comprehensive"
+    schedule: "weekly"
+
+  - type: "continuous_monitoring"
+    target: "example-langchain-agent"
+    categories:
+      - "prompt_injection"
+      - "tool_abuse"
+    depth: "lightweight"
+    schedule: "always"
+
+safety:
+  kill_switch_enabled: true             # Emergency halt capability
+  max_finding_severity: "critical"      # Maximum severity to pursue
+  require_human_approval_above: "high"  # Require human OK above this level
+  audit_log_path: "./logs/arta-audit.jsonl"
+  alert_on_guardrail_violation: true
+  alert_channels:
+    - "slack:#arta-alerts"
+    - "email:security@nailinstitute.org"
+
+output:
+  ave_schema_version: "2.0.0"
+  output_dir: "./findings/"
+  auto_submit_to_review: false          # Auto-submit AVE cards to NAIL pipeline
+  generate_poc: true                    # Generate proof-of-concept code
+  generate_defences: true               # Generate defence recommendations
+  report_format: "json"                 # json | markdown | html
