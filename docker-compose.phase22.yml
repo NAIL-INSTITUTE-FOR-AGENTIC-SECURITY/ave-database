@@ -1,0 +1,82 @@
+###############################################################################
+# Phase 22 — Adaptive Learning & Evolutionary Defence
+# Services: red-team-engine (9600), defence-learning (9601),
+#           capability-marketplace (9602), training-data-forge (9603),
+#           integration-gateway (9604)
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  networks:
+    - ave-phase22
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:$${PORT}/health')"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 15s
+
+services:
+  # ── 1. Evolutionary Red-Team Engine ──────────────────────────────────────
+  red-team-engine:
+    <<: *common
+    build:
+      context: ./red-team-engine
+      dockerfile: ../Dockerfile
+    container_name: ave-red-team-engine
+    ports:
+      - "9600:9600"
+    environment:
+      - PORT=9600
+
+  # ── 2. Continuous Defence Learning Loop ──────────────────────────────────
+  defence-learning:
+    <<: *common
+    build:
+      context: ./defence-learning
+      dockerfile: ../Dockerfile
+    container_name: ave-defence-learning
+    ports:
+      - "9601:9601"
+    environment:
+      - PORT=9601
+
+  # ── 3. Agent Capability Marketplace ──────────────────────────────────────
+  capability-marketplace:
+    <<: *common
+    build:
+      context: ./capability-marketplace
+      dockerfile: ../Dockerfile
+    container_name: ave-capability-marketplace
+    ports:
+      - "9602:9602"
+    environment:
+      - PORT=9602
+
+  # ── 4. Synthetic Training Data Forge ─────────────────────────────────────
+  training-data-forge:
+    <<: *common
+    build:
+      context: ./training-data-forge
+      dockerfile: ../Dockerfile
+    container_name: ave-training-data-forge
+    ports:
+      - "9603:9603"
+    environment:
+      - PORT=9603
+
+  # ── 5. Cross-Phase Integration Gateway ───────────────────────────────────
+  integration-gateway:
+    <<: *common
+    build:
+      context: ./integration-gateway
+      dockerfile: ../Dockerfile
+    container_name: ave-integration-gateway
+    ports:
+      - "9604:9604"
+    environment:
+      - PORT=9604
+
+networks:
+  ave-phase22:
+    driver: bridge
