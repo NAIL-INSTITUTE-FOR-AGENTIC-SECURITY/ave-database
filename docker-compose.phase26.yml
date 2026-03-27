@@ -1,0 +1,72 @@
+###############################################################################
+# Phase 26 — Autonomous Governance & Self-Regulating Systems
+# Services: policy-compiler           (9905)
+#           autonomous-audit-agent    (9906)
+#           governance-token-ledger   (9907)
+#           regulation-simulator      (9908)
+#           constitutional-ai-monitor (9909)
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:$${PORT}/health')"]
+    interval: 30s
+    timeout: 5s
+    retries: 3
+
+services:
+  # ── 1. Policy Compiler ──────────────────────────────────────────────
+  policy-compiler:
+    <<: *common
+    build: ./policy-compiler
+    container_name: policy-compiler
+    ports:
+      - "9905:9905"
+    environment:
+      PORT: "9905"
+    command: uvicorn server:app --host 0.0.0.0 --port 9905
+
+  # ── 2. Autonomous Audit Agent ───────────────────────────────────────
+  autonomous-audit-agent:
+    <<: *common
+    build: ./autonomous-audit-agent
+    container_name: autonomous-audit-agent
+    ports:
+      - "9906:9906"
+    environment:
+      PORT: "9906"
+    command: uvicorn server:app --host 0.0.0.0 --port 9906
+
+  # ── 3. Governance Token Ledger ──────────────────────────────────────
+  governance-token-ledger:
+    <<: *common
+    build: ./governance-token-ledger
+    container_name: governance-token-ledger
+    ports:
+      - "9907:9907"
+    environment:
+      PORT: "9907"
+    command: uvicorn server:app --host 0.0.0.0 --port 9907
+
+  # ── 4. Regulation Simulator ─────────────────────────────────────────
+  regulation-simulator:
+    <<: *common
+    build: ./regulation-simulator
+    container_name: regulation-simulator
+    ports:
+      - "9908:9908"
+    environment:
+      PORT: "9908"
+    command: uvicorn server:app --host 0.0.0.0 --port 9908
+
+  # ── 5. Constitutional AI Monitor ────────────────────────────────────
+  constitutional-ai-monitor:
+    <<: *common
+    build: ./constitutional-ai-monitor
+    container_name: constitutional-ai-monitor
+    ports:
+      - "9909:9909"
+    environment:
+      PORT: "9909"
+    command: uvicorn server:app --host 0.0.0.0 --port 9909
