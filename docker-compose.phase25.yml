@@ -1,0 +1,72 @@
+###############################################################################
+# Phase 25 — Cognitive Security & Human-AI Teaming
+# Services: cognitive-load-balancer  (9900)
+#           explainability-dashboard (9901)
+#           human-override-controller(9902)
+#           trust-calibration        (9903)
+#           collaborative-learning   (9904)
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:$${PORT}/health')"]
+    interval: 30s
+    timeout: 5s
+    retries: 3
+
+services:
+  # ── 1. Cognitive Load Balancer ──────────────────────────────────────
+  cognitive-load-balancer:
+    <<: *common
+    build: ./cognitive-load-balancer
+    container_name: cognitive-load-balancer
+    ports:
+      - "9900:9900"
+    environment:
+      PORT: "9900"
+    command: uvicorn server:app --host 0.0.0.0 --port 9900
+
+  # ── 2. Explainability Dashboard ─────────────────────────────────────
+  explainability-dashboard:
+    <<: *common
+    build: ./explainability-dashboard
+    container_name: explainability-dashboard
+    ports:
+      - "9901:9901"
+    environment:
+      PORT: "9901"
+    command: uvicorn server:app --host 0.0.0.0 --port 9901
+
+  # ── 3. Human Override Controller ────────────────────────────────────
+  human-override-controller:
+    <<: *common
+    build: ./human-override-controller
+    container_name: human-override-controller
+    ports:
+      - "9902:9902"
+    environment:
+      PORT: "9902"
+    command: uvicorn server:app --host 0.0.0.0 --port 9902
+
+  # ── 4. Trust Calibration Engine ─────────────────────────────────────
+  trust-calibration:
+    <<: *common
+    build: ./trust-calibration
+    container_name: trust-calibration
+    ports:
+      - "9903:9903"
+    environment:
+      PORT: "9903"
+    command: uvicorn server:app --host 0.0.0.0 --port 9903
+
+  # ── 5. Collaborative Learning Tracker ───────────────────────────────
+  collaborative-learning:
+    <<: *common
+    build: ./collaborative-learning
+    container_name: collaborative-learning
+    ports:
+      - "9904:9904"
+    environment:
+      PORT: "9904"
+    command: uvicorn server:app --host 0.0.0.0 --port 9904
