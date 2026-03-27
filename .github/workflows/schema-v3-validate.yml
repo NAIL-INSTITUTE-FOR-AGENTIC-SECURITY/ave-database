@@ -1,0 +1,109 @@
+name: Schema v3 Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema-v3/**'
+      - 'ave-database/cards/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'schema-v3/**'
+      - 'ave-database/cards/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-schema:
+    name: Validate v3 Schema & Example
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install jsonschema
+
+      - name: Validate schema is valid JSON Schema
+        run: |
+          python3 -c "
+          import json
+          with open('schema-v3/spec/ave-card-v3.schema.json') as f:
+              schema = json.load(f)
+          assert schema.get('\$schema'), 'Missing \$schema declaration'
+          assert schema.get('title'), 'Missing title'
+          assert 'properties' in schema, 'Missing properties'
+          print(f'✓ Schema v3 structure valid ({len(schema[\"properties\"])} properties)')
+          "
+
+      - name: Validate example card against v3 schema
+        run: |
+          python3 -c "
+          import json, jsonschema
+          with open('schema-v3/spec/ave-card-v3.schema.json') as f:
+              schema = json.load(f)
+          with open('schema-v3/examples/AVE-2025-0001-v3.json') as f:
+              card = json.load(f)
+          jsonschema.validate(card, schema)
+          print('✓ Example card validates against v3 schema')
+          "
+
+      - name: Verify category taxonomy completeness
+        run: |
+          python3 -c "
+          import json
+          with open('schema-v3/spec/ave-card-v3.schema.json') as f:
+              schema = json.load(f)
+          cats = schema['properties']['category']['enum']
+          assert len(cats) == 24, f'Expected 24 categories, got {len(cats)}'
+          assert len(cats) == len(set(cats)), 'Duplicate categories found'
+          print(f'✓ 24 unique categories in v3 taxonomy')
+          "
+
+      - name: Test migration script (dry run)
+        run: |
+          python3 schema-v3/migration/migrate_v1v2_to_v3.py \
+            --input-dir ave-database/cards/ \
+            --output-dir /tmp/cards-v3/ \
+            --dry-run
+
+      - name: Run migration and validate output
+        run: |
+          python3 schema-v3/migration/migrate_v1v2_to_v3.py \
+            --input-dir ave-database/cards/ \
+            --output-dir /tmp/cards-v3/
+
+          python3 -c "
+          import json, jsonschema, glob, sys
+          with open('schema-v3/spec/ave-card-v3.schema.json') as f:
+              schema = json.load(f)
+          errors = 0
+          cards = sorted(glob.glob('/tmp/cards-v3/AVE-*.json'))
+          for card_path in cards:
+              with open(card_path) as f:
+                  card = json.load(f)
+              try:
+                  jsonschema.validate(card, schema)
+              except jsonschema.ValidationError as e:
+                  print(f'::error::FAIL {card_path}: {e.message}')
+                  errors += 1
+          if errors:
+              sys.exit(1)
+          print(f'✓ All {len(cards)} migrated cards validate against v3 schema')
+          "
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Schema v3 Validation" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Categories:** 24" >> $GITHUB_STEP_SUMMARY

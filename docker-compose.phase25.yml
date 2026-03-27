@@ -17,10 +17,10 @@ x-common: &common
 
 services:
   # ── 1. Cognitive Load Balancer ──────────────────────────────────────
-  cognitive-load-balancer:
+  cognitive-load-balancer-v2:
     <<: *common
     build: ./cognitive-load-balancer
-    container_name: cognitive-load-balancer
+    container_name: cognitive-load-balancer-v2
     ports:
       - "9900:9900"
     environment:

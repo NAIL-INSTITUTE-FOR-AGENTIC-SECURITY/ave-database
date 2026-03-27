@@ -1,0 +1,197 @@
+name: "CI: Full Platform Validation"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # Weekly full validation — Sundays at 02:00 UTC
+    - cron: '0 2 * * 0'
+
+permissions:
+  contents: read
+
+jobs:
+  # ── 1. AVE Card Database ─────────────────────────────────────────────────
+  cards:
+    name: "📇 AVE Cards"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema pyyaml
+      - name: Validate JSON syntax
+        run: |
+          python3 -c "
+          import json, glob, sys
+          errors = 0
+          for f in sorted(glob.glob('ave-database/cards/*.json')):
+              try: json.load(open(f))
+              except Exception as e:
+                  print(f'::error::{f}: {e}')
+                  errors += 1
+          if errors: sys.exit(1)
+          print(f'✓ {len(glob.glob(\"ave-database/cards/*.json\"))} JSON files valid')
+          "
+      - name: Check JSON/MD pairs
+        run: |
+          cd ave-database/cards
+          errors=0
+          for j in *.json; do
+            [ ! -f "${j%.json}.md" ] && echo "::error::Missing ${j%.json}.md" && errors=$((errors+1))
+          done
+          [ $errors -gt 0 ] && exit 1
+          echo "✓ All JSON/MD pairs present"
+      - name: Check duplicate IDs
+        run: |
+          python3 -c "
+          import json, glob, sys
+          ids = [json.load(open(f))['ave_id'] for f in glob.glob('ave-database/cards/*.json')]
+          dupes = [x for x in ids if ids.count(x) > 1]
+          if dupes:
+              print(f'::error::Duplicates: {set(dupes)}')
+              sys.exit(1)
+          print(f'✓ {len(ids)} unique AVE IDs')
+          "
+      - name: Validate severities
+        run: |
+          python3 -c "
+          import json, glob, sys
+          valid = {'critical','high','medium','low'}
+          bad = [(json.load(open(f))['ave_id'], json.load(open(f)).get('severity'))
+                 for f in glob.glob('ave-database/cards/*.json')
+                 if json.load(open(f)).get('severity','').lower() not in valid]
+          if bad:
+              print(f'::error::Invalid severities: {bad}')
+              sys.exit(1)
+          print('✓ All severities valid')
+          "
+
+  # ── 2. Schema v3 ────────────────────────────────────────────────────────
+  schema:
+    name: "📐 Schema v3"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema
+      - name: Validate v3 example
+        run: |
+          python3 -c "
+          import json, jsonschema
+          schema = json.load(open('schema-v3/spec/ave-card-v3.schema.json'))
+          card = json.load(open('schema-v3/examples/AVE-2025-0001-v3.json'))
+          jsonschema.validate(card, schema)
+          print('✓ v3 example validates')
+          "
+      - name: Dry-run migration
+        run: |
+          python3 schema-v3/migration/migrate_v1v2_to_v3.py \
+            --input-dir ave-database/cards/ \
+            --output-dir /tmp/v3-cards/ \
+            --dry-run
+
+  # ── 3. Docker Compose ───────────────────────────────────────────────────
+  compose:
+    name: "🐳 Docker Compose"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate YAML & check duplicates
+        run: |
+          python3 -c "
+          import yaml, glob, sys
+          svcs = {}; errors = []
+          for f in sorted(glob.glob('docker-compose.phase*.yml')):
+              try:
+                  data = yaml.safe_load(open(f))
+                  for s in data.get('services', {}):
+                      if s in svcs:
+                          errors.append(f'Dup: {s} in {f} and {svcs[s]}')
+                      svcs[s] = f
+              except Exception as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              for e in errors: print(f'::error::{e}')
+              sys.exit(1)
+          print(f'✓ {len(glob.glob(\"docker-compose.phase*.yml\"))} files, {len(svcs)} services')
+          "
+
+  # ── 4. Security Scan ───────────────────────────────────────────────────
+  security:
+    name: "🔒 Security Scan"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for secrets in cards
+        run: |
+          python3 -c "
+          import re, glob, sys
+          patterns = [
+              r'(?:sk|pk|api)[_-]?[a-zA-Z0-9]{20,}',
+              r'(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,}',
+              r'AKIA[0-9A-Z]{16}',
+              r'-----BEGIN (?:RSA |EC )?PRIVATE KEY-----',
+          ]
+          found = []
+          for f in glob.glob('ave-database/cards/*.json'):
+              content = open(f).read()
+              if any(re.search(p, content) for p in patterns):
+                  found.append(f)
+          if found:
+              print(f'::error::Secrets in: {found}')
+              sys.exit(1)
+          print('✓ No secrets in card files')
+          "
+
+  # ── 5. Annual Report Data ──────────────────────────────────────────────
+  report:
+    name: "📊 Annual Report Data"
+    runs-on: ubuntu-latest
+    needs: cards
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify report data generation
+        run: |
+          python3 annual-report/2025/scripts/generate_report_data.py
+          python3 -c "
+          import json
+          data = json.load(open('annual-report/2025/data/report-data-2025.json'))
+          assert data['total_cards'] >= 100, f'Expected ≥100 cards, got {data[\"total_cards\"]}'
+          print(f'✓ Report data: {data[\"total_cards\"]} cards, avg AVSS {data[\"avg_avss\"]}')
+          "
+
+  # ── Summary ────────────────────────────────────────────────────────────
+  summary:
+    name: "📋 CI Summary"
+    runs-on: ubuntu-latest
+    needs: [cards, schema, compose, security, report]
+    if: always()
+    steps:
+      - name: Generate summary
+        run: |
+          echo "### 🛡️ AVE Platform CI" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| AVE Cards | ${{ needs.cards.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Schema v3 | ${{ needs.schema.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Docker Compose | ${{ needs.compose.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Scan | ${{ needs.security.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Annual Report | ${{ needs.report.result }} |" >> $GITHUB_STEP_SUMMARY
+      - name: Fail if any check failed
+        if: contains(needs.*.result, 'failure')
+        run: exit 1

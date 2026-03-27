@@ -53,7 +53,7 @@ services:
       - PORT=9502
 
   # ── 4. Autonomous Incident Commander ─────────────────────────────────────
-  incident-commander:
+  incident-commander-v2:
     <<: *common
     build:
       context: ./incident-commander

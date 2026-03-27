@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [6.3.0] — 2026-03-27
+
+### Added
+- **Master CI Pipeline** (`.github/workflows/ci.yml`) — Unified workflow running 5 parallel checks: AVE Cards, Schema v3, Docker Compose, Security Scan, Annual Report Data; weekly scheduled run; consolidated summary dashboard
+- **Docker Compose Validation Workflow** (`.github/workflows/docker-compose-validate.yml`) — YAML syntax, duplicate service names, port conflicts, healthcheck coverage
+- **Schema v3 Validation Workflow** (`.github/workflows/schema-v3-validate.yml`) — Schema structure, example validation, taxonomy completeness, migration dry-run, full migration + validation
+
+### Fixed
+- **Docker Compose duplicate services** — Renamed 4 duplicate service names across phases 20/21/24/25 (`digital-twin-v2`, `incident-commander-v2`, `federated-threat-intel-v2`, `cognitive-load-balancer-v2`)
+
+---
+
 ## [6.2.0] — 2026-03-27
 
 ### Added

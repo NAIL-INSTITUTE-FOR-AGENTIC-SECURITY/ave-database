@@ -68,7 +68,7 @@ services:
       - PHASE=20
 
   # ── 4. Digital Twin Simulation Engine ─────────────────────────────────────
-  digital-twin:
+  digital-twin-v2:
     <<: *common
     build:
       context: ./digital-twin

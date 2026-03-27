@@ -1,0 +1,136 @@
+name: Docker Compose Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docker-compose*.yml'
+      - 'Dockerfile*'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docker-compose*.yml'
+      - 'Dockerfile*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-compose:
+    name: Validate Docker Compose Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate YAML syntax
+        run: |
+          python3 -c "
+          import yaml, glob, sys
+          errors = []
+          for f in sorted(glob.glob('docker-compose*.yml')):
+              try:
+                  with open(f) as fh:
+                      data = yaml.safe_load(fh)
+                  if not data or 'services' not in data:
+                      errors.append(f'{f}: no services key')
+              except Exception as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print(f'✓ All {len(glob.glob(\"docker-compose*.yml\"))} compose files parse successfully')
+          "
+
+      - name: Check for duplicate service names
+        run: |
+          python3 -c "
+          import yaml, glob, sys
+          all_services = {}
+          errors = []
+          for f in sorted(glob.glob('docker-compose.phase*.yml')):
+              with open(f) as fh:
+                  data = yaml.safe_load(fh)
+              for svc in data.get('services', {}):
+                  if svc in all_services:
+                      errors.append(f'Duplicate service \"{svc}\" in {f} and {all_services[svc]}')
+                  all_services[svc] = f
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print(f'✓ {len(all_services)} unique services across all compose files')
+          "
+
+      - name: Check for port conflicts
+        run: |
+          python3 -c "
+          import yaml, glob, sys
+          port_map = {}
+          conflicts = []
+          for f in sorted(glob.glob('docker-compose.phase*.yml')):
+              with open(f) as fh:
+                  data = yaml.safe_load(fh)
+              for svc, cfg in data.get('services', {}).items():
+                  for p in (cfg.get('ports') or []):
+                      host_port = str(p).split(':')[0]
+                      key = (f, host_port)
+                      if host_port in port_map and port_map[host_port][0] != f:
+                          conflicts.append(f'Port {host_port} used by {svc} in {f} AND {port_map[host_port][1]} in {port_map[host_port][0]}')
+                      port_map[host_port] = (f, svc)
+          if conflicts:
+              for c in conflicts:
+                  print(f'::warning::{c}')
+          print(f'✓ {len(port_map)} host ports mapped')
+          "
+
+      - name: Verify healthchecks exist
+        run: |
+          python3 -c "
+          import yaml, glob, sys
+          missing = []
+          infra = {'redis', 'postgres', 'neo4j', 'elasticsearch', 'kafka', 'zookeeper'}
+          for f in sorted(glob.glob('docker-compose.phase*.yml')):
+              with open(f) as fh:
+                  data = yaml.safe_load(fh)
+              for svc, cfg in data.get('services', {}).items():
+                  if svc in infra:
+                      continue
+                  # Check for healthcheck in service or via x-common anchor
+                  if not cfg.get('healthcheck') and '<<' not in str(cfg):
+                      missing.append(f'{f}: {svc}')
+          if missing:
+              for m in missing:
+                  print(f'::warning::No healthcheck: {m}')
+          else:
+              print('✓ All application services have healthchecks')
+          "
+
+      - name: Summary
+        if: always()
+        run: |
+          python3 -c "
+          import yaml, glob
+          total_files = len(glob.glob('docker-compose.phase*.yml'))
+          total_services = 0
+          for f in glob.glob('docker-compose.phase*.yml'):
+              with open(f) as fh:
+                  data = yaml.safe_load(fh)
+              total_services += len(data.get('services', {}))
+          with open('$GITHUB_STEP_SUMMARY' if '$GITHUB_STEP_SUMMARY' != '' else '/dev/null', 'a') as fh:
+              pass
+          print(f'{total_files} compose files, {total_services} services')
+          " || true
+          echo "### Docker Compose Validation" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY

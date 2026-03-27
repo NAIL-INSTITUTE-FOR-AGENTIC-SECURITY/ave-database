@@ -16,12 +16,12 @@ x-common: &common
 
 services:
   # -- Service 1: Federated Threat Intelligence Hub (9800) --------------------
-  federated-threat-intel:
+  federated-threat-intel-v2:
     <<: *common
     build:
       context: ./federated-threat-intel
       dockerfile: ../Dockerfile
-    container_name: federated-threat-intel
+    container_name: federated-threat-intel-v2
     ports:
       - "9800:9800"
     environment:
