@@ -1,0 +1,92 @@
+###############################################################################
+# Phase 18 — Ecosystem Integration & Production Hardening
+#
+# Services:
+#   api-gateway          → :9200  API Gateway & Service Mesh
+#   event-bus            → :9201  Event-Driven Integration Bus
+#   observability        → :9202  Observability Stack
+#   test-harness         → :9203  End-to-End Test Harness
+#   deployment-pipeline  → :9204  Production Deployment Pipeline
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  networks:
+    - nail-network
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:${PORT:-8000}/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 15s
+
+services:
+
+  api-gateway:
+    <<: *common
+    build:
+      context: ./api-gateway
+      dockerfile: ../Dockerfile
+    container_name: nail-api-gateway
+    ports:
+      - "9200:9200"
+    environment:
+      - PORT=9200
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/health"]
+
+  event-bus:
+    <<: *common
+    build:
+      context: ./event-bus
+      dockerfile: ../Dockerfile
+    container_name: nail-event-bus
+    ports:
+      - "9201:9201"
+    environment:
+      - PORT=9201
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9201/health"]
+
+  observability:
+    <<: *common
+    build:
+      context: ./observability
+      dockerfile: ../Dockerfile
+    container_name: nail-observability
+    ports:
+      - "9202:9202"
+    environment:
+      - PORT=9202
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9202/health"]
+
+  test-harness:
+    <<: *common
+    build:
+      context: ./test-harness
+      dockerfile: ../Dockerfile
+    container_name: nail-test-harness
+    ports:
+      - "9203:9203"
+    environment:
+      - PORT=9203
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9203/health"]
+
+  deployment-pipeline:
+    <<: *common
+    build:
+      context: ./deployment-pipeline
+      dockerfile: ../Dockerfile
+    container_name: nail-deployment-pipeline
+    ports:
+      - "9204:9204"
+    environment:
+      - PORT=9204
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9204/health"]
+
+networks:
+  nail-network:
+    driver: bridge
