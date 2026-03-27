@@ -1,0 +1,644 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nailinstitute.org/schemas/ave-card-v3.0.0.json",
+  "title": "AVE Card v3.0.0",
+  "description": "Agentic Vulnerability Enumeration card schema v3.0.0. Unifies v1/v2 category taxonomies into a harmonised 24-category hierarchy, adds explicit schema versioning, confidence levels, exploitability metrics, and AVSS v2 scoring. Fully backward-compatible with v1/v2 cards.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ave_id",
+    "name",
+    "category",
+    "severity",
+    "status",
+    "summary",
+    "mechanism",
+    "blast_radius",
+    "prerequisite",
+    "environment",
+    "evidence",
+    "defences",
+    "date_discovered",
+    "date_published"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0.0",
+      "description": "Schema version this card conforms to"
+    },
+    "ave_id": {
+      "type": "string",
+      "pattern": "^AVE-\\d{4}-\\d{4}$",
+      "description": "Unique identifier in format AVE-YYYY-NNNN"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "description": "Human-readable vulnerability name"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Alternative names for this vulnerability"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "injection",
+        "alignment",
+        "structural",
+        "memory",
+        "drift",
+        "social",
+        "tool",
+        "resource",
+        "temporal",
+        "consensus",
+        "delegation",
+        "credential",
+        "fabrication",
+        "multi_agent_collusion",
+        "temporal_exploitation",
+        "composite",
+        "model_extraction",
+        "reward_hacking",
+        "environmental_manipulation",
+        "model_poisoning",
+        "supply_chain",
+        "monitoring_evasion",
+        "denial_of_service",
+        "emergent_behaviour"
+      ],
+      "description": "Primary vulnerability category — 24 unified categories harmonising v1, v2, and community-contributed taxonomies"
+    },
+    "subcategory": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Optional finer-grained subcategory within the primary category (e.g. 'indirect_injection', 'sycophantic_collapse')"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"],
+      "description": "Severity level derived from AVSS score"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["confirmed", "high", "moderate", "low", "theoretical"],
+      "description": "Confidence level in the vulnerability's existence and reproducibility"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "under_review",
+        "published",
+        "proven",
+        "proven_mitigated",
+        "theoretical",
+        "not_proven",
+        "deprecated",
+        "superseded"
+      ],
+      "description": "Lifecycle status of the AVE entry"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Brief description of the vulnerability"
+    },
+    "mechanism": {
+      "type": "string",
+      "description": "Technical description of how the vulnerability works"
+    },
+    "blast_radius": {
+      "type": "string",
+      "description": "Scope and impact of successful exploitation"
+    },
+    "prerequisite": {
+      "type": "string",
+      "description": "Conditions required for the vulnerability to exist"
+    },
+    "exploitability": {
+      "type": "object",
+      "description": "Exploitability metrics (inspired by CVSSv4 but adapted for agentic systems)",
+      "properties": {
+        "attack_vector": {
+          "type": "string",
+          "enum": ["network", "adjacent", "local", "physical", "agent_to_agent", "tool_chain"],
+          "description": "How the attacker reaches the vulnerable agent"
+        },
+        "attack_complexity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Complexity of conditions beyond attacker control"
+        },
+        "privileges_required": {
+          "type": "string",
+          "enum": ["none", "low", "high", "agent_level"],
+          "description": "Level of privileges needed before exploitation"
+        },
+        "user_interaction": {
+          "type": "string",
+          "enum": ["none", "passive", "active"],
+          "description": "Whether a human user must participate"
+        },
+        "agent_interaction": {
+          "type": "string",
+          "enum": ["none", "single_agent", "multi_agent", "swarm"],
+          "description": "Number of agents that must be involved"
+        },
+        "automation_level": {
+          "type": "string",
+          "enum": ["manual", "semi_automated", "fully_automated"],
+          "description": "Whether the exploit can be automated"
+        }
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "required": ["frameworks", "models_tested", "multi_agent", "tools_required", "memory_required"],
+      "properties": {
+        "frameworks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "models_tested": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "multi_agent": { "type": "boolean" },
+        "tools_required": { "type": "boolean" },
+        "memory_required": { "type": "boolean" },
+        "min_agent_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum number of agents required for exploitation"
+        },
+        "orchestration_pattern": {
+          "type": "string",
+          "enum": ["hierarchical", "peer_to_peer", "swarm", "pipeline", "any"],
+          "description": "Required multi-agent orchestration pattern"
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["experiment_id", "key_metric", "key_value", "data_file"],
+        "properties": {
+          "experiment_id": { "type": "string" },
+          "key_metric": { "type": "string" },
+          "key_value": { "type": "string" },
+          "data_file": { "type": "string" },
+          "p_value": { "type": ["number", "null"] },
+          "sample_size": { "type": ["integer", "null"] },
+          "cross_model": { "type": "boolean" },
+          "reproducibility_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Rate of successful reproduction across different environments (0.0–1.0)"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "defences": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["name", "effectiveness"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "effectiveness": {
+                "type": "string",
+                "enum": ["high", "medium", "low", "theoretical", "unknown"]
+              },
+              "implementation_cost": {
+                "type": "string",
+                "enum": ["low", "medium", "high"],
+                "description": "Estimated effort to implement this defence"
+              },
+              "side_effects": {
+                "type": "string",
+                "description": "Known negative side effects (latency, false positives, etc.)"
+              },
+              "references": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "date_discovered": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date the vulnerability was first identified (YYYY-MM-DD)"
+    },
+    "date_published": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date the AVE card was published (YYYY-MM-DD)"
+    },
+    "cwe_mapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["cwe_id"],
+        "properties": {
+          "cwe_id": { "type": "string", "pattern": "^CWE-\\d+$" },
+          "name": { "type": "string" },
+          "relationship": {
+            "type": "string",
+            "enum": ["exact", "partial", "related", "analogy"],
+            "description": "How closely this CWE maps to the agentic vulnerability"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "mitre_mapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["technique_id", "technique_name"],
+        "properties": {
+          "technique_id": { "type": "string" },
+          "technique_name": { "type": "string" },
+          "framework": {
+            "type": "string",
+            "enum": ["ATT&CK", "ATLAS", "ATT&CK+ATLAS"],
+            "description": "Which MITRE framework the technique belongs to"
+          },
+          "tactic": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "type": {
+            "type": "string",
+            "enum": ["paper", "blog", "advisory", "code", "incident", "standard", "tool"],
+            "description": "Type of reference material"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "related_aves": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ave_id", "relationship"],
+        "properties": {
+          "ave_id": { "type": "string", "pattern": "^AVE-\\d{4}-\\d{4}$" },
+          "relationship": {
+            "type": "string",
+            "enum": ["variant_of", "composed_of", "enables", "mitigates", "supersedes", "related"],
+            "description": "Semantic relationship to the other AVE card"
+          },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "avss_score": {
+      "type": "object",
+      "description": "Agentic Vulnerability Severity Score v2 — extended for multi-agent and temporal dimensions",
+      "properties": {
+        "overall_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "severity_label": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "info"]
+        },
+        "base_score": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+        "temporal_score": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+        "agentic_score": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+        "multi_agent_score": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Score component reflecting multi-agent amplification risk"
+        },
+        "vector_string": { "type": ["string", "null"] },
+        "vector": { "type": ["object", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "poc": {
+      "type": "object",
+      "description": "Proof of concept details",
+      "properties": {
+        "available": { "type": "boolean" },
+        "description": { "type": "string" },
+        "code_url": { "type": "string", "format": "uri" },
+        "language": { "type": "string" },
+        "complexity": {
+          "type": "string",
+          "enum": ["trivial", "low", "medium", "high", "expert"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "event"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "event": { "type": "string" },
+          "actor": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "multi_agent": {
+      "type": "object",
+      "description": "Multi-agent specific vulnerability details (v2+)",
+      "properties": {
+        "topology": {
+          "type": "string",
+          "enum": ["hierarchical", "flat", "mesh", "star", "ring", "hybrid"]
+        },
+        "min_agents": { "type": "integer", "minimum": 2 },
+        "max_agents": { "type": ["integer", "null"] },
+        "propagation_pattern": {
+          "type": "string",
+          "enum": ["broadcast", "cascade", "targeted", "random_walk", "epidemic"]
+        },
+        "trust_exploitation": {
+          "type": "string",
+          "description": "How inter-agent trust is exploited"
+        },
+        "role_confusion": {
+          "type": "boolean",
+          "description": "Whether the attack exploits agent role confusion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "temporal": {
+      "type": "object",
+      "description": "Temporal exploitation details (v2+)",
+      "properties": {
+        "time_dependency": {
+          "type": "string",
+          "enum": ["immediate", "delayed", "periodic", "conditional"]
+        },
+        "window_of_vulnerability": { "type": "string" },
+        "persistence": {
+          "type": "string",
+          "enum": ["ephemeral", "session", "persistent", "permanent"]
+        },
+        "decay_rate": {
+          "type": "string",
+          "description": "How quickly the vulnerability becomes less exploitable over time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "attack_graph": {
+      "type": "object",
+      "description": "Graph representation of multi-step attack paths (v2+)",
+      "properties": {
+        "entry_points": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "label"],
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "type": {
+                "type": "string",
+                "enum": ["action", "condition", "impact", "defence"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to"],
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "label": { "type": "string" },
+              "probability": { "type": "number", "minimum": 0, "maximum": 1 }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "composites": {
+      "type": "array",
+      "description": "Component AVE IDs if this is a composite vulnerability (v2+)",
+      "items": {
+        "type": "string",
+        "pattern": "^AVE-\\d{4}-\\d{4}$"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Origin and verification chain (v2+)",
+      "properties": {
+        "discovered_by": { "type": "string" },
+        "verified_by": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tool_used": { "type": "string" },
+        "methodology": {
+          "type": "string",
+          "enum": ["manual_testing", "automated_fuzzing", "formal_verification", "red_team", "incident_analysis", "theoretical_analysis"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "affected_components": {
+      "type": "array",
+      "description": "Specific software components affected (v2+)",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["framework", "library", "model", "tool", "protocol", "runtime", "orchestrator"]
+          },
+          "versions_affected": { "type": "string" },
+          "cpe": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "counterfactual": {
+      "type": "object",
+      "description": "What-if analysis: impact if the vulnerability were exploited at scale (v2+)",
+      "properties": {
+        "worst_case_scenario": { "type": "string" },
+        "estimated_blast_radius": { "type": "string" },
+        "economic_impact": { "type": "string" },
+        "cascading_failures": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "regulatory_impact": {
+      "type": "object",
+      "description": "Regulatory and compliance implications (v2+)",
+      "properties": {
+        "eu_ai_act": {
+          "type": "object",
+          "properties": {
+            "risk_level": {
+              "type": "string",
+              "enum": ["unacceptable", "high", "limited", "minimal"]
+            },
+            "articles": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "obligations": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "nist_ai_rmf": {
+          "type": "object",
+          "properties": {
+            "functions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["GOVERN", "MAP", "MEASURE", "MANAGE"]
+              }
+            },
+            "categories": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "subcategories": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "iso_42001": {
+          "type": "object",
+          "properties": {
+            "clauses": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "controls": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "iso_27001": {
+          "type": "object",
+          "properties": {
+            "clauses": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "controls": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "sector_specific": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["regulation", "jurisdiction"],
+            "properties": {
+              "regulation": { "type": "string" },
+              "jurisdiction": { "type": "string" },
+              "requirements": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "_meta": {
+      "type": "object",
+      "description": "Internal metadata (not part of the vulnerability definition)",
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "migrated_from": {
+          "type": "string",
+          "description": "Previous schema version this card was migrated from (e.g. '1.0.0', '2.0.0')"
+        },
+        "review_count": { "type": "integer", "minimum": 0 },
+        "last_reviewed_by": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "contributor": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "handle": { "type": "string" },
+        "organisation": { "type": "string" },
+        "orcid": { "type": "string", "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

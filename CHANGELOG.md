@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [6.2.0] — 2026-03-27
+
+### Added
+- **AVE Card Schema v3.0.0** — Unified 24-category taxonomy harmonising v1 (13), v2 (20), and community categories; new required `schema_version` field, optional `subcategory`, `confidence`, `exploitability` metrics (attack vector, complexity, privileges, agent/user interaction, automation level), enhanced defences with implementation cost and side effects, AVSS v2 multi-agent scoring, evidence reproducibility scores, CWE relationship types, MITRE framework tags, reference types, related-AVE semantics
+- **Taxonomy Documentation** (`schema-v3/docs/taxonomy-v3.md`) — Complete 24-category hierarchy with descriptions, groupings, example AVEs, v1/v2 migration mappings, subcategory examples
+- **Migration Guide** (`schema-v3/docs/migration-guide.md`) — Step-by-step v1/v2 → v3 upgrade instructions with automated and manual workflows
+- **Migration Script** (`schema-v3/migration/migrate_v1v2_to_v3.py`) — Automated bulk migration with category normalisation, confidence inference, dry-run mode; tested against all 100 cards (0 errors)
+- **Example Card** (`schema-v3/examples/AVE-2025-0001-v3.json`) — Fully populated v3 example validated against the schema
+
+---
+
 ## [6.1.0] — 2026-03-27
 
 ### Added
