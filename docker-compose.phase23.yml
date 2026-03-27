@@ -1,0 +1,90 @@
+###############################################################################
+# Phase 23 — Autonomous Resilience & Self-Healing Infrastructure
+# Services: self-healing-mesh (9700), chaos-orchestrator (9701),
+#           config-vault (9702), capacity-planner (9703),
+#           regulatory-tracker (9704)
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:$${PORT}/health')"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 15s
+
+services:
+  # -- Service 1: Self-Healing Service Mesh (9700) ----------------------------
+  self-healing-mesh:
+    <<: *common
+    build:
+      context: ./self-healing-mesh
+      dockerfile: ../Dockerfile
+    container_name: self-healing-mesh
+    ports:
+      - "9700:9700"
+    environment:
+      - PORT=9700
+    networks:
+      - ave-phase23
+
+  # -- Service 2: Chaos Engineering Orchestrator (9701) -----------------------
+  chaos-orchestrator:
+    <<: *common
+    build:
+      context: ./chaos-orchestrator
+      dockerfile: ../Dockerfile
+    container_name: chaos-orchestrator
+    ports:
+      - "9701:9701"
+    environment:
+      - PORT=9701
+    networks:
+      - ave-phase23
+
+  # -- Service 3: Distributed Configuration Vault (9702) ---------------------
+  config-vault:
+    <<: *common
+    build:
+      context: ./config-vault
+      dockerfile: ../Dockerfile
+    container_name: config-vault
+    ports:
+      - "9702:9702"
+    environment:
+      - PORT=9702
+    networks:
+      - ave-phase23
+
+  # -- Service 4: Predictive Capacity Planner (9703) -------------------------
+  capacity-planner:
+    <<: *common
+    build:
+      context: ./capacity-planner
+      dockerfile: ../Dockerfile
+    container_name: capacity-planner
+    ports:
+      - "9703:9703"
+    environment:
+      - PORT=9703
+    networks:
+      - ave-phase23
+
+  # -- Service 5: Regulatory Change Tracker (9704) ---------------------------
+  regulatory-tracker:
+    <<: *common
+    build:
+      context: ./regulatory-tracker
+      dockerfile: ../Dockerfile
+    container_name: regulatory-tracker
+    ports:
+      - "9704:9704"
+    environment:
+      - PORT=9704
+    networks:
+      - ave-phase23
+
+networks:
+  ave-phase23:
+    driver: bridge
