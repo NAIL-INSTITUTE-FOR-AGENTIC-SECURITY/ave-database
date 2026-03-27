@@ -1,0 +1,87 @@
+###############################################################################
+# Phase 30 – Collective Intelligence & Swarm Security
+# Services: swarm-consensus-engine, collaborative-learning-broker,
+#           agent-reputation-system, emergent-strategy-detector,
+#           cross-domain-knowledge-fuser
+# Ports:    9925-9929
+###############################################################################
+
+x-common: &common
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:${PORT:-8000}/health"]
+    interval: 30s
+    timeout: 5s
+    retries: 3
+
+services:
+
+  swarm-consensus-engine:
+    <<: *common
+    build: ./swarm-consensus-engine
+    container_name: swarm-consensus-engine
+    ports:
+      - "9925:9925"
+    environment:
+      - PORT=9925
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9925/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  collaborative-learning-broker:
+    <<: *common
+    build: ./collaborative-learning-broker
+    container_name: collaborative-learning-broker
+    ports:
+      - "9926:9926"
+    environment:
+      - PORT=9926
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9926/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  agent-reputation-system:
+    <<: *common
+    build: ./agent-reputation-system
+    container_name: agent-reputation-system
+    ports:
+      - "9927:9927"
+    environment:
+      - PORT=9927
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9927/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  emergent-strategy-detector:
+    <<: *common
+    build: ./emergent-strategy-detector
+    container_name: emergent-strategy-detector
+    ports:
+      - "9928:9928"
+    environment:
+      - PORT=9928
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9928/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  cross-domain-knowledge-fuser:
+    <<: *common
+    build: ./cross-domain-knowledge-fuser
+    container_name: cross-domain-knowledge-fuser
+    ports:
+      - "9929:9929"
+    environment:
+      - PORT=9929
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9929/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
