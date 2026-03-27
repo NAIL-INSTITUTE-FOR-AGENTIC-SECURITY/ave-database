@@ -217,7 +217,7 @@
 
 ---
 
-## 📋 Planned
+## ✅ Completed (continued)
 
 ### Phase 19: Intelligence Amplification & Autonomous Governance (Complete)
 
@@ -229,7 +229,9 @@
 
 ---
 
-### Phase 20: Quantum-Resilient Security & Universal Interoperability ✅
+## ✅ Completed (continued)
+
+### Phase 20: Quantum-Resilient Security & Universal Interoperability (Complete)
 
 - [x] **Post-Quantum Cryptographic Vault** — PQC key management with 4 algorithm families (lattice/hash_based/code_based/hybrid), 5 seed algorithms (KYBER-768/DILITHIUM-3/SPHINCS-256/MCELIECE-460896/HYBRID-KYBER-X25519), 6-state key lifecycle (generated→active→suspended→rotating→compromised→retired), envelope encryption (XOR-simulated, production-noted), sign/verify operations per algorithm, rotation policies with automatic/manual modes + max age/max operations thresholds, crypto-agility migration plans between algorithm families with 5-stage pipeline (assessment→parallel_run→gradual_migration→verification→cutover) and progress tracking, NIST/CNSA compliance markers, full audit trail with sha256 request hashing, comprehensive analytics (post-quantum-vault/)
 - [x] **Universal Agent Protocol Bridge** — Cross-framework agent communication with 6 protocols (MCP/A2A/LangChain/AutoGen/CrewAI/custom), NUAM canonical message format (Namespace/Unique-ID/Action/Metadata), bidirectional translation with protocol-specific format definitions (MCP=jsonrpc, A2A=task/message, LangChain=input/config, AutoGen=sender/receiver/message, CrewAI=task/agent/context, custom=action/payload), protocol negotiation with mutual capability detection + priority-ordered fallback, endpoint registry with URL/protocol/capability discovery, session management with cross-protocol message relay using automatic to_nuam/from_nuam translation, comprehensive analytics (agent-protocol-bridge/)
@@ -239,7 +241,9 @@
 
 ---
 
-### Phase 21: Planetary-Scale Orchestration & Sovereign AI Governance ✅
+## ✅ Completed (continued)
+
+### Phase 21: Planetary-Scale Orchestration & Sovereign AI Governance (Complete)
 
 - [x] **Global Edge Mesh Coordinator** — Distributed edge node orchestration with 5 node states (initialising→healthy→degraded→draining→offline), capacity tracking (CPU/memory/GPU/bandwidth), Haversine distance-based geo-scoring, 4 routing strategies (latency_optimised/geo_fenced/cost_optimised/resilience_first) with strategy-specific weight scoring, 6 task types (inference/training/data_pipeline/monitoring/security_scan/compliance_check) with affinity/anti-affinity placement + automatic resource reservation, 3 consistency models (eventual/bounded_staleness/strong) with quorum-based replication (N/2+1 healthy nodes), partition-tolerant coordination, topology overview with region/state grouping, comprehensive analytics (edge-mesh/)
 - [x] **Sovereign Data Residency Engine** — Jurisdiction-aware data governance with 8 seed jurisdictions (EU/US/UK/CN/JP/AU/BR/IN) bootstrapped with real legislation references (GDPR/CCPA/PIPL/APPI/Privacy Act 1988/LGPD/DPDP), 3 sovereignty levels (full/partial/advisory), 7 data categories (PII/financial/health/biometric/children/criminal/general), residency policies per jurisdiction+category with retention periods + encryption requirements + replication rules, data asset registry with automated compliance checking (region validation, encryption enforcement, replication limits, transfer destination legality), 5 transfer legal bases (adequacy_decision/standard_contractual_clauses/binding_corporate_rules/explicit_consent/derogation), transfer approval workflow with auto-deny for prohibited destinations, compliance check endpoint, comprehensive analytics (data-residency/)
@@ -249,7 +253,9 @@
 
 ---
 
-### Phase 22: Adaptive Learning & Evolutionary Defence ✅
+## ✅ Completed (continued)
+
+### Phase 22: Adaptive Learning & Evolutionary Defence (Complete)
 
 - [x] **Evolutionary Red-Team Engine** — Self-evolving adversarial agents with genetic-algorithm evolution pipeline (initialisation→evaluation→selection→crossover→mutation→elitism), 8 gene types (reconnaissance/delivery/exploitation/persistence/exfiltration/evasion/lateral_movement/impact) mapped to AVE attack primitives, multi-dimensional fitness scoring (success_rate 35% + stealth_score 25% + impact_score 25% + novelty_bonus 15%), configurable campaigns with population size/max generations/mutation rate/crossover rate/elitism count/fitness threshold, tournament selection (top-K parents), single-point crossover with random gene mutation, organism state tracking (pending→evaluated→elite→retired), persistent hall-of-fame gene pool (top 10 all-time), full ancestry lineage tracing, generation statistics with avg/max/min fitness, comprehensive analytics (red-team-engine/)
 - [x] **Continuous Defence Learning Loop** — Closed-loop defence adaptation with labelled incident sample ingestion (true_positive/false_positive/false_negative/true_negative), 5 detection model algorithms (random_forest/gradient_boosting/neural_network/svm/ensemble), model versioning with 5-state lifecycle (training→evaluating→candidate→promoted→retired), learning cycles with configurable min_samples + performance thresholds, simulated training producing accuracy/precision/recall/F1 metrics, candidate evaluation with F1 threshold gating, model promotion with automatic retirement of previous models, baseline metrics preservation for drift comparison, 3 drift detection types (concept_drift via false-negative rate/data_drift/performance_drift with accuracy+F1 delta monitoring), AVE category distribution tracking, comprehensive analytics (defence-learning/)
@@ -259,7 +265,9 @@
 
 ---
 
-### Phase 23: Autonomous Resilience & Self-Healing Infrastructure ✅
+## ✅ Completed (continued)
+
+### Phase 23: Autonomous Resilience & Self-Healing Infrastructure (Complete)
 
 - [x] **Self-Healing Service Mesh** — Autonomous service recovery with mesh node registry supporting 6 health states (healthy→warning→degraded→failing→dead→recovering), composite health_score 0-100 (error_rate 40% + latency 30% + CPU 15% + memory 15%), traffic routes with source→target + weight + active flag, heartbeat ingestion with rolling 50-entry metric windows, failure prediction using linear trend analysis (heartbeat_miss_rate + latency_trend + error_rate_trend → risk_score 0-1 with recommended action mapping), 5 self-healing actions (restart with counter + reroute with weight reduction + isolate with full route deactivation + scale_up + restore with gradual weight recovery), automatic health-based route weight adjustment (degraded→weight×0.5, healthy→weight=1.0), cascading failure prevention via circuit-breaking and node isolation, topology overview with region grouping, comprehensive analytics with health/healing/route statistics (self-healing-mesh/)
 - [x] **Chaos Engineering Orchestrator** — Automated fault injection framework with 8 fault types (latency_injection/error_injection/cpu_stress/memory_pressure/network_partition/dependency_failure/clock_skew/disk_pressure), 7-state experiment lifecycle (draft→scheduled→running→validating→completed|aborted|rolled_back), hypothesis-driven experiments with configurable target services + duration (5-3600s) + fault parameters, steady-state validation with metric+operator+threshold checks (lt/gt/eq/lte/gte) evaluated before/during/after fault injection, blast radius control (max_affected_services + max_error_rate + geographic_scope), simulated fault execution with automatic metric generation + violation detection + rollback on safety violations, experiment scheduling with 5 frequencies (once/hourly/daily/weekly/monthly), abort capability, detailed results with metrics_before/during/after + violations + hypothesis_validated flag, comprehensive analytics with outcome/rollback/violation tracking (chaos-orchestrator/)
@@ -269,7 +277,9 @@
 
 ---
 
-### Phase 24: Federated Intelligence & Cross-Organisational Collaboration ✅
+## ✅ Completed (continued)
+
+### Phase 24: Federated Intelligence & Cross-Organisational Collaboration (Complete)
 
 - [x] **Federated Threat Intelligence Hub** — Cross-organisational threat sharing with organisation registry supporting 4 trust tiers (founder/partner/associate/observer) with TLP clearance mapping (founder=all / partner=AMBER+below / associate=GREEN+CLEAR / observer=CLEAR only), 5 TLP levels (RED/AMBER+STRICT/AMBER/GREEN/CLEAR) enforced at query time, 8 indicator types (ip/domain/hash/url/email/cve/ttps/behaviour) with confidence 0-100 + 5 severities + MITRE ATT&CK mapping + tag enrichment + TTL-based expiry, privacy-preserving hash-only sharing mode (SHA-256), sighting reports (confirmed/suspected/false_positive) with automatic confidence adjustment (+5 confirmed / -10 false_positive), bilateral sharing agreements with indicator_type + TLP ceiling + retention_days scope + revocation, filtered indicator feeds with TLP gating per consumer org, comprehensive analytics (federated-threat-intel/)
 - [x] **Collaborative Incident War Room** — Real-time multi-stakeholder incident coordination with 4 severities (P1-critical/P2-high/P3-medium/P4-low), 6 incident types (security_breach/data_leak/system_outage/policy_violation/supply_chain/other), 7-state lifecycle (declared→triaging→investigating→containing→remediating→resolved→post_mortem), 5 participant roles (commander/analyst/responder/observer/liaison) with multi-org assignment, evidence locker with 7 evidence types + SHA-256 integrity hashing + classification (public/restricted/confidential) + chain-of-custody tracking, ordered timeline reconstruction with 6 event types (detection/escalation/action/communication/evidence/resolution), role-scoped message board with evidence references, status updates with next_steps + ETA, auto-generated post-mortem reports from timeline + evidence + status data, comprehensive analytics (incident-war-room/)
@@ -279,7 +289,9 @@
 
 ---
 
-### Phase 25: Cognitive Security & Human-AI Teaming ✅
+## ✅ Completed (continued)
+
+### Phase 25: Cognitive Security & Human-AI Teaming (Complete)
 
 - [x] **Cognitive Load Balancer** — Adaptive task allocation engine with agent registry (human/ai/hybrid) + cognitive profiling (processing_speed/working_memory_capacity/attention_span_minutes/stress_tolerance 0-1/preferred_task_types), real-time fatigue modelling (fatigue_level 0-1 with rest_needed flag at >0.8 + productivity_multiplier = 1 - fatigue×0.5), task ingestion with cognitive_complexity 1-10 + required_expertise + estimated_duration + priority (critical/high/medium/low) + max_latency, 6-state task lifecycle (pending→assigned→in_progress→review→completed→failed), multi-factor allocation scoring (expertise_match 40% + cognitive_fit 25% + availability 20% + fatigue_penalty 15%) assigning to highest-scoring available agent, workload rebalancing redistributing overloaded queues to underloaded agents, heartbeat-driven fatigue tracking, comprehensive analytics with utilisation rates + fatigue distribution (cognitive-load-balancer/)
 - [x] **Explainability Dashboard** — Interactive decision explanation interface with decision registry (5 types: classification/recommendation/action/prediction/escalation) + model_id + input features + confidence scoring, simulated SHAP-style feature attribution (positive/negative direction + magnitude sorting), 4-level explanation abstraction (executive=one-sentence summary / analyst=key factors+weights / technical=full feature attribution / audit=complete reasoning chain + model internals + causal chain), causal chain visualisation with observation→inference→decision node graphs + directed edges (causes/contributes_to) + critical path identification, counterfactual reasoning ("what-if" feature modification → re-decision → delta + flip detection + plausibility scoring), explanation feedback loop (helpful/unclear/misleading ratings), comprehensive analytics with decision volume + feedback quality tracking (explainability-dashboard/)
@@ -289,7 +301,9 @@
 
 ---
 
-### Phase 26: Autonomous Governance & Self-Regulating Systems ✅
+## ✅ Completed (continued)
+
+### Phase 26: Autonomous Governance & Self-Regulating Systems (Complete)
 
 - [x] **Policy Compiler** — Declarative policy-to-code compiler with natural language rule ingestion (6 domains: access_control/data_handling/ai_governance/privacy/security/compliance), simulated NLP→AST parsing extracting subject/action/resource/effect/conditions with parse confidence scoring, 5-stage compilation pipeline (parse→validate→optimise→compile→test), 4 output formats (python_function/rego/json_rule/pseudocode), semantic validation detecting contradictions + ambiguities + shadowed rules, cross-policy conflict scanning (direct_contradiction/scope_overlap/precedence_ambiguity) with severity + resolution suggestions, auto-generated test cases (positive/negative/boundary) per rule, policy deployment with environment targeting + rollback, semantic versioning, comprehensive analytics (policy-compiler/)
 - [x] **Autonomous Audit Agent** — Self-directed AI auditor with target registry (5 types: api_service/database/ai_model/pipeline/infrastructure), 6 campaign types (scheduled/continuous/triggered/spot_check/deep_dive/post_incident) with 5-state lifecycle (planned→running→analysing→reporting→closed), 7 probe types (health_check/log_analysis/config_drift/permission_scan/data_flow_trace/model_drift/latency_profile) with z-score anomaly detection against rolling baselines, 5 anomaly categories (spike/drift/pattern_break/missing_data/threshold_breach), auto-generated findings (violation/anomaly/warning/observation/recommendation) with 5 severities, 5 remediation types (auto_fix/escalate/quarantine/notify/log_only), auto-generated audit reports with risk_score 0-100 + executive_summary + recommendations, comprehensive analytics (autonomous-audit-agent/)
@@ -299,7 +313,9 @@
 
 ---
 
-### Phase 27: Predictive Security & Threat Anticipation ✅
+## ✅ Completed (continued)
+
+### Phase 27: Predictive Security & Threat Anticipation (Complete)
 
 - [x] **Attack Surface Predictor** — ML-driven attack surface analysis with asset registry (7 types: service/api/database/storage/network/compute/model), 4 exposure levels (public/internal/restricted/isolated) with weighted scoring, composite surface score (exposure 300 + complexity 350 + connectivity 350 scaled by data_sensitivity), change ingestion (7 types: deploy/config_change/dependency_update/infra_scale/feature_toggle/access_grant/decommission), 4 magnitude levels with direction-aware impact prediction (surface delta % + risk score delta), multi-factor surface scoring, trend forecasting (7/30/90 day exponential projection with breach probability), hotspot detection ranked by risk score, automated reduction recommendations (reduce_exposure/harden_entry_point/reduce_dependencies with effort estimates + risk reduction), comprehensive analytics (attack-surface-predictor/)
 - [x] **Threat Evolution Modeller** — Threat actor evolution tracking with actor registry (6 types: nation_state/organised_crime/hacktivist/insider/script_kiddie/apt_group + sophistication 1-10), MITRE-aligned TTP observation recording (tactic/technique/procedure + effectiveness rating), capability timeline tracking (6 types: tooling/infrastructure/tradecraft/social_engineering/zero_day/supply_chain × 4 maturity levels: experimental/developing/operational/advanced), evolution trajectory analysis (sophistication trend rising/stable/declining, capability velocity, TTP diversity), predictive capability modelling (probability + time-to-develop for missing capabilities), campaign tracking (3 statuses: active/dormant/concluded), threat landscape overview (actor distribution + dominant tactics), comprehensive analytics (threat-evolution-modeller/)
@@ -309,7 +325,9 @@
 
 ---
 
-### Phase 28: Resilience Engineering & Recovery Intelligence ✅
+## ✅ Completed (continued)
+
+### Phase 28: Resilience Engineering & Recovery Intelligence (Complete)
 
 - [x] **Chaos Experiment Engine** — Controlled fault injection framework with target registry (6 types: service/database/network/compute/storage/ai_pipeline + criticality 1-10 + baseline metrics), experiment library (8 fault types: latency_injection/cpu_stress/memory_pressure/disk_fill/network_partition/process_kill/dependency_failure/data_corruption), 3 blast radius containment levels (single_instance/service_subset/full_service with max-impact-percentage), 7-state experiment lifecycle (designed→approved→preparing→running→observing→analysing→completed/aborted) with enforced transitions, safety guards (pre-flight health checks + criticality-9 blocks + cooldown enforcement between experiments), fault-type-specific impact simulation (error rate multipliers + latency multipliers × containment × severity), 3 rollback strategies (automatic/manual/progressive) with auto-rollback on failure, 3-tier outcome classification (passed/degraded/failed) with severity-tagged findings + recommendations, steady state hypothesis validation, comprehensive analytics (chaos-experiment-engine/)
 - [x] **Recovery Orchestrator** — Intelligent disaster recovery with system registry (6 types: application/database/cache/message_queue/load_balancer/ai_service + recovery_priority 1-10 + RTO/RPO targets + dependency graph), recovery plan creation with topological dependency sorting (circular dependency detection), 7 disaster scenarios (region_outage/database_corruption/network_partition/ransomware/cascading_failure/data_centre_loss/key_compromise), 6-state recovery execution (initiated→assessing→sequencing→restoring→verifying→completed/failed) with communication log, dependency-aware restoration sequencing via topological sort, 3 verification types (health_check/data_integrity/functional_test) with pass/fail/degraded per system, progressive confidence scoring 0-100 (verified×100 + degraded×50 / total) with timeline tracking + trend analysis, RTO/RPO breach alerting, stakeholder communication log, comprehensive analytics (recovery-orchestrator/)
@@ -319,7 +337,9 @@
 
 ---
 
-### Phase 29: Adaptive Intelligence & Self-Improving Systems ✅
+## ✅ Completed (continued)
+
+### Phase 29: Adaptive Intelligence & Self-Improving Systems (Complete)
 
 - [x] **Meta-Learning Orchestrator** — Continuous meta-learning across all AI components with component registry (7 types: classifier/detector/recommender/generator/embedder/ranker/agent), config space management with hyperparameter definitions (name/param_type float|int|bool|categorical + range + sensitivity 0-1), 8 performance signal metrics (accuracy/latency_p99/throughput/false_positive_rate/false_negative_rate/resource_usage/drift_score/user_satisfaction), 6 optimisation strategies (grid_search/random_search/bayesian_optimisation/evolutionary/bandit/transfer_learning), meta-learning trial execution with iterative config perturbation producing per-iteration value tracking + best config delta + improvement percentage with statistical significance testing (2% threshold), strategy-component affinity matrix (avg improvement + significant count per component_type × strategy), auto-tuning recommendations with per-parameter estimated improvement and confidence intervals (0.5 base + 0.05 per trial), config versioning with rollback safety, comprehensive analytics (meta-learning-orchestrator/)
 - [x] **Feedback Loop Analyser** — Feedback loop detection and stability management with node registry (6 types: sensor/processor/decision_engine/actuator/data_store/human_operator + throughput baseline + criticality 1-10), directed edge creation with signal gain and delay, DFS-based cycle detection algorithm, 4 loop type classification (positive_reinforcing gain > 1.05 / negative_stabilising gain < 0.95 / mixed / unknown), signal tracing with per-hop amplitude tracking and cumulative amplification factor, runaway risk detection (cumulative gain > 1.2), 4 dampening control types (rate_limiter/gain_cap/delay_injection/circuit_break) with node-specific application, stability scoring 0-100 (gain deviation × criticality weighted), what-if dampening simulation (parameter-based stability projection without applying changes), stability overview (stable ≥ 70 / at_risk 40-70 / critical < 40 + dampening coverage ratio), comprehensive analytics (feedback-loop-analyser/)
@@ -329,7 +349,9 @@
 
 ---
 
-### Phase 30: Collective Intelligence & Swarm Security ✅
+## ✅ Completed (continued)
+
+### Phase 30: Collective Intelligence & Swarm Security (Complete)
 
 - [x] **Swarm Consensus Engine** — Distributed multi-agent consensus with agent registry (8 types: threat_detector/anomaly_analyser/policy_enforcer/response_coordinator/intel_gatherer/vulnerability_scanner/access_monitor/forensic_investigator + weight + reliability 0-1 + domain), 5-state proposal lifecycle (submitted→voting→tallying→decided→archived), 6 voting protocols (simple_majority/supermajority_66/supermajority_75/unanimous/weighted_majority/ranked_choice) with protocol-specific thresholds, vote casting (approve/reject/abstain) with confidence 0-1 and effective power = weight × confidence × reliability, configurable quorum enforcement, real-time tally computation with automatic decision rendering, dissent analysis (dissent strength + high-confidence dissenter identification), deadlock detection with margin analysis and escalation suggestions, per-agent voting history with consistency tracking, comprehensive analytics (swarm-consensus-engine/)
 - [x] **Collaborative Learning Broker** — Federated learning management with participant registry (6 types: endpoint_agent/network_monitor/cloud_sentinel/identity_guardian/threat_hunter/siem_collector + data_size + privacy_level public|anonymised|differential_privacy|encrypted + trust_score 0-1), 6-state session lifecycle (created→recruiting→training→aggregating→validating→completed/failed), 4 learning modes (federated_averaging/secure_aggregation/gossip_protocol/split_learning), per-round gradient submission with local training metrics, weighted aggregation by trust_score × data_weight, model poisoning detection via z-score outlier analysis (threshold > 2.5) with participant quarantining, cumulative privacy budget tracking (epsilon per round) with exhaustion alerting, global model versioning with regression rollback, convergence monitoring (delta < threshold) and divergence detection (3+ consecutive loss increases), comprehensive analytics (collaborative-learning-broker/)
@@ -339,7 +361,9 @@
 
 ---
 
-### Phase 31: Autonomous Governance & Policy Intelligence ✅
+## ✅ Completed (continued)
+
+### Phase 31: Autonomous Governance & Policy Intelligence (Complete)
 
 - [x] **Policy Synthesis Engine** — Automated policy generation and refinement with source registry (6 types: incident_history/compliance_framework/threat_intelligence/operational_pattern/industry_standard/expert_input + reliability 0-1 + domain), rule extraction engine with 4 modes (pattern_matching/nlp_analysis/statistical_inference/hybrid) producing typed rules with severity + scope + confidence, 6-state policy lifecycle (draft→review→approved→active→deprecated→archived) with version tracking, rule CRUD within policies with effectiveness tracking, conflict detection via scope overlap and opposing actions across all active policies, 4 conflict resolution strategies (priority_based/specificity/temporal_latest/human_review), refinement feedback loop (strengthen/weaken/remove rules based on false positive rates), coverage analysis against compliance source requirements, impact simulation with precision/recall/F1 against historical incident data, policy diff between any two policies (added/removed/modified rules), comprehensive analytics (policy-synthesis-engine/)
 - [x] **Governance Audit Trail** — Immutable append-only audit logging with actor registry (6 types: ai_agent/human_operator/automated_pipeline/hybrid_team/external_system/governance_bot + role + clearance level 1-5 + accountability chain), event logging across 8 categories (decision_made/policy_applied/override_executed/escalation_triggered/access_granted/access_denied/configuration_changed/anomaly_detected), SHA-256 hash chain integrity (each event hash = SHA-256(payload + previous_hash) forming tamper-evident chain), chain verification endpoint validating entire hash chain with integrity percentage and broken link identification, provenance tracking via parent_event_id traversal (triggering event → data inputs → model → reasoning → decision → outcome), accountability chain building per actor, compliance evidence package generation with filtered event timelines and actor attestations and chain integrity verification, search/filter across categories/actors/severity, comprehensive analytics (governance-audit-trail/)
@@ -361,26 +385,59 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 
 ---
 
+## 📋 What's Next
+
+All 31 phases are complete. The platform is fully operational with 155
+micro-services spanning ports 9780–9934. Current priorities:
+
+### Near-Term (Q2 2026)
+
+- [ ] **AVE Card Expansion** — Grow the database from 50 to 100+ cards, focusing on v2 categories and community submissions
+- [ ] **Schema v3.0** — Introduce new categories: Agent-on-Agent Attacks, Semantic Side Channels, Governance Evasion, Cross-Modal Attacks
+- [ ] **Annual Report 2025 Data Population** — Run the automated pipeline to replace [N]/[X] placeholders with real statistics
+- [ ] **Multi-Agent Testbed** — Production deployment of the simulation sandbox with 50+ agent configurations
+- [ ] **NAIL Certification Launch** — First public certification exams (Bronze & Silver tiers)
+
+### Mid-Term (Q3–Q4 2026)
+
+- [ ] **AIBOM Standard** — Contribute to industry AI Bill of Materials standardisation (CycloneDX / SPDX extension)
+- [ ] **Regional Chapter Expansion** — Launch LATAM, MEA, and CIS regional chapters
+- [ ] **Academic Programme Adoption** — Partner with 10+ universities for AAS curriculum delivery
+- [ ] **Production Hardening** — Kubernetes orchestration, horizontal scaling, and HA for all 155 services
+- [ ] **Annual Report 2026** — Begin data collection for the second annual edition
+
+### Long-Term (2027+)
+
+- [ ] **AVE as ISO Standard** — Submit the AVE taxonomy for formal ISO/IEC standardisation
+- [ ] **Federated Production Network** — Live multi-organisation threat intelligence sharing
+- [ ] **Autonomous Defence GA** — General availability of the autonomous defence agent in supervised mode
+- [ ] **Formal Verification Toolkit** — Verifiable safety guarantees for agent scaffolding and tool permissions
+
+---
+
 ## 📈 Key Metrics We Track
 
 | Metric | Current | Target (EOY 2026) |
 |--------|---------|-------------------|
+| Phases Complete | 31 | 31 |
+| Micro-Services | 155 | 155 |
 | AVE Cards | 50 | 100+ |
+| AVE Categories (v1 + v2) | 20 | 24+ |
 | Contributors | 5 | 50+ |
 | GitHub Stars | — | 1,000+ |
-| Categories | 13 | 20+ |
 | CTF Events | 1 | 4+ |
 | Published Papers | 1 | 3+ |
-| Framework Integrations | 4 | 5+ |
+| Framework Integrations | 4 | 8+ |
 | Experiment Templates | 6 | 20+ |
 | Benchmark Suites | 4 | 10+ |
 | Study Protocols | 5 | 15+ |
 | Certification Tiers | 4 | 4 |
-| Regulatory Mappings | 4 | 8+ |
+| Regulatory Mappings | 8 | 12+ |
 | RFC Specifications | 2 | 5+ |
 | Regional Chapters | 3 | 6+ |
-| Academic Course Modules | 10 | 20+ |
-| Vendor Integrations | 3 | 8+ |
+| Academic Course Modules | 13 | 20+ |
+| Vendor Integrations | 9 | 15+ |
+| Annual Report Chapters | 14 | 14+ |
 | Insurance Industry Sectors | 9 | 15+ |
 | Weekly Digest Subscribers | 0 | 500+ |
 | Partnership Tiers | 4 | 4 |
@@ -394,8 +451,9 @@ Have an idea? Open a [Discussion](https://github.com/NAIL-INSTITUTE-FOR-AGENTIC-
 | Knowledge Graph Node Types | 10 | 15+ |
 | Attack Technique Families | 8 | 20+ |
 | Defence Profile Types | 6 | 10+ |
+| Docker Compose Files | 21 | 21 |
 
 ---
 
-*Updated: July 2025*
+*Updated: March 2026*
 *NAIL Institute — Neuravant AI Limited*
