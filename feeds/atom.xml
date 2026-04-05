@@ -3,7 +3,7 @@
   <title>NAIL Institute — AVE Database</title>
   <subtitle>Agentic Vulnerability Enumeration (AVE) database updates from the NAIL Institute for Agentic AI Security.</subtitle>
   <id>https://nailinstitute.org/feeds/atom.xml</id>
-  <updated>2026-03-27T23:38:07Z</updated>
+  <updated>2026-04-05T18:16:54Z</updated>
   <generator version="1.0">NAIL AVE Feed Generator</generator>
   <link href="https://api.nailinstitute.org/feeds/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://nailinstitute.org" rel="alternate" type="text/html"/>
