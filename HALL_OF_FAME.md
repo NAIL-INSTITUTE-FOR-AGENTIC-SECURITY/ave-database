@@ -1,11 +1,11 @@
 # 🏆 AVE Database — Hall of Fame
 
-[![Contributors](https://img.shields.io/badge/Contributors-5-blue)](./CONTRIBUTING.md)
-[![Cards](https://img.shields.io/badge/AVE_Cards-100-green)](./ave-database/)
+[![Contributors](https://img.shields.io/badge/Contributors-6-blue)](./CONTRIBUTING.md)
+[![Cards](https://img.shields.io/badge/AVE_Cards-106-green)](./ave-database/)
 
 > **Recognising the security researchers who make agentic AI safer.**
 >
-> *Auto-generated on 2026-03-27 22:59 UTC from AVE Database card data.*
+> *Auto-generated on 2026-04-13 06:10 UTC from AVE Database card data.*
 
 ---
 
@@ -30,6 +30,7 @@
 | #3 | 🏗️ architect | **priya.r** | 6,625⚡ | 15 | 📚🎯💀🎓🗺️ +13 (18) | 3mo |
 | #4 | 🏗️ architect | **m.torres** | 6,025⚡ | 15 | 📚🎯💀🎓🗺️ +13 (18) | 3mo |
 | #5 | 🏗️ architect | **j.okafor** | 5,335⚡ | 14 | 📚🎯🎓🗺️🔥 +11 (16) | 3mo |
+| #6 | 🏗️ architect | **d.leigh** | 4,150⚡ | 6 | 💀⚔️🎓🔥⚡ +10 (15) | 2mo |
 
 ---
 
@@ -90,6 +91,18 @@
 **Cards:** `AVE-2025-0004`, `AVE-2025-0006`, `AVE-2025-0016`, `AVE-2025-0018`, `AVE-2025-0031`, `AVE-2025-0052`, `AVE-2025-0058`, `AVE-2025-0063`, `AVE-2025-0070`, `AVE-2025-0076`, `AVE-2025-0082`, `AVE-2025-0087`, `AVE-2025-0092`, `AVE-2025-0098`
 
 **Progress to FELLOW:** `[█████████████░░░░░░░]` 67% (2,665 XP needed)
+
+---
+
+### 🏗️ d.leigh
+
+**Tier:** ARCHITECT · **XP:** 4,150⚡ · **Cards:** 6 · **Rank:** #6
+
+**Badges:** 💀 Critical Hunter ⚔️ Mitigation Master 🎓 Polymath 🔥 Trailblazer ⚡ Compound Threat 🖐️ Five Alive 🔴 Critical Finder 🐀 Lab Rat 🧪 Proof Positive 🕸️ Web Weaver 💡 Novel Discovery 🩸 First Blood 📊 Show Your Work 🛡️ Shield Bearer 🔗 Connector
+
+**Cards:** `AVE-2025-0101`, `AVE-2025-0102`, `AVE-2025-0103`, `AVE-2025-0104`, `AVE-2025-0105`, `AVE-2025-0106`
+
+**Progress to FELLOW:** `[██████████░░░░░░░░░░]` 52% (3,850 XP needed)
 
 ---
 
